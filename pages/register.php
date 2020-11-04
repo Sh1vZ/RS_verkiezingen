@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="../assets/vendor/quill/dist/quill.core.css">
+    <link rel="stylesheet" href="../assets/vendor/animate.css/animate.min.css">
+  <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
     <!--CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
 </head>
@@ -87,13 +89,13 @@
                             <div class="text-center  mb-4">
                                 <p>Vul uw gegevens in</p>
                             </div>
-                            <form role="form">
+                            <form role="form" id="register-form" method="post">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-id-badge"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="ID" type="text">
+                                        <input class="form-control" name="id" placeholder="ID" id="id" type="number">
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
@@ -101,18 +103,21 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <input class="form-control datepicker" placeholder="Select date" type="text">
+                                        <input class="form-control"  id="date" placeholder="Select date" type="date">
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
-                                        <select class="form-control district" data-placeholder="Selecteer District" data-allow-clear="true" data-toggle="select">
+                                        <select class="form-control district" name="district" id="district" data-placeholder="Selecteer District" data-allow-clear="true" data-toggle="select">
                                                 <option></option>
-                                                <option>B</option>
-                                                <option>C</option>
-                                                <option>D</option>
-                                                <option>E</option>
-                                                <option>F</option>
+                                                <?php
+                                                    include '../assets/php/conn.php';
+                                                    $sql    = "SELECT * FROM district";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                    echo "<option value='" . $row['ID_district'] . "'>" . $row['districtnaam'] . "</option>";
+                                                    }
+                                                ?>
                                               </select>
                                     </div>
                                 </div>
@@ -121,11 +126,11 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" type="password">
+                                        <input class="form-control" name="pwd" id="pwd" placeholder="Password" type="password">
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary my-4">Sign in</button>
+                                    <button type="button" onclick=" Register()" name="register" class="btn btn-primary my-4">Sign in</button>
                                 </div>
                             </form>
                         </div>
@@ -150,6 +155,8 @@
     <script src="../assets/vendor/select2/dist/js/select2.min.js"></script>
     <script src="../assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="../assets/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
+  <script src="../assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
     <!--JS -->
     <script src="../assets/js/rs_verkiezingen.js"></script>
 </body>
