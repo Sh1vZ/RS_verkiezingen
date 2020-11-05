@@ -1,7 +1,6 @@
 <?php
 require 'conn.php';
-session_start();
-if($_SESSION['login']==false){
-    header("Location:../index.php");
+if(!isset($_SERVER['HTTP_REFERER'])){
+    header('location:error.html');
     exit();
 }

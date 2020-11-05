@@ -1,5 +1,6 @@
 <?php 
       include '../assets/php/conn.php';
+      include '../assets/php/check.php';
       session_start();
  ?>
 <!DOCTYPE html>
