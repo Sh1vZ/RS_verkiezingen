@@ -24349,3 +24349,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle {
 button:active {
     background-color: #267046
 }
+
+.input-error {
+    border-color: red;
+}

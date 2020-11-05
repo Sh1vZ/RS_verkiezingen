@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../assets/vendor/quill/dist/quill.core.css">
     <link rel="stylesheet" href="../assets/vendor/animate.css/animate.min.css">
   <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
 </head>
@@ -89,13 +90,13 @@
                             <div class="text-center  mb-4">
                                 <p>Vul uw gegevens in</p>
                             </div>
-                            <form role="form" id="register-form" method="post">
+                            <form role="form" id="register-form"  method="post">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-id-badge"></i></span>
                                         </div>
-                                        <input class="form-control" name="id" placeholder="ID" id="id" type="number">
+                                        <input class="form-control" name="id" placeholder="ID" id="id" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
@@ -129,8 +130,8 @@
                                         <input class="form-control" name="pwd" id="pwd" placeholder="Password" type="password">
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <button type="button" onclick=" Register()" name="register" class="btn btn-primary my-4">Sign in</button>
+                                <div class="text-center submit">
+                                    <button type="button" onclick=" Register()" name="register"  class="btn btn-primary my-4">Registreer</button>
                                 </div>
                             </form>
                         </div>
