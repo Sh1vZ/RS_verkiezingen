@@ -19,6 +19,7 @@
     <!-- Icons -->
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
@@ -95,7 +96,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="../assets/php/logout.php" class="dropdown-item">
+                                    <a href="#" onclick="Logout()" class="dropdown-item">
                                         <i class="ni ni-user-run"></i>
                                         <span>Logout</span>
                                     </a>
@@ -199,7 +200,9 @@
     <!-- Optional JS -->
     <script src="../assets/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
     <!--JS -->
+    <script src="../assets/js/app.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
 </body>
 

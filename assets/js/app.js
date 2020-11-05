@@ -326,3 +326,41 @@ function adminLogin() {
         }
     })
 }
+
+function Logout() {
+    $.ajax({
+        url: '../assets/php/logout.php?action=logout',
+        success: function(data) {
+            if (data = "success") {
+                let timerInterval
+                Swal.fire({
+                    title: 'U bent succesvol uitgelogd',
+                    html: 'U gaat terug naar de inlog pagina',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    willOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            const content = Swal.getContent()
+                            if (content) {
+                                const b = content.querySelector('b')
+                                if (b) {
+                                    b.textContent = Swal.getTimerLeft()
+                                }
+                            }
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        window.location = '../index.php'
+                    }
+                })
+            }
+
+        }
+    });
+
+}
