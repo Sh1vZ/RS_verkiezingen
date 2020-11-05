@@ -50,7 +50,7 @@
                 </div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item btn-icon">
-                        <a href="../index.html">
+                        <a href="../index.php">
                             <button class="btn btn-secondary btn-lg btn-block" type="button">
                 <span class="btn-inner--icon"><i class="fa fa-user fa-lg"></i></span>
                 <span class="btn-inner--text">User Login</span>
@@ -96,7 +96,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-id-badge"></i></span>
                                         </div>
-                                        <input class="form-control" name="id" placeholder="ID" id="id" type="text">
+                                        <input class="form-control" name="id" placeholder="ID" id="id" type="text" maxlength = "40">
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
