@@ -1,3 +1,7 @@
+<?php
+include '../assets/php/check.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>RS_verkiezingen | Home</title>
+    <title>RS_verkiezingen | Districten</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
@@ -14,6 +18,10 @@
     <!-- Icons -->
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+
+
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
@@ -25,7 +33,7 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header d-flex align-items-center">
-                <a class="navbar-brand" href="./dashboard-gebruiker.php">
+                <a class="navbar-brand" href="./dashboard.php">
                     <h3><img src="../assets/img/brand/favicon.png" class="navbar-brand-img nav-img" alt="..."> RS_Verkiezingen</h3>
                 </a>
                 <div class="ml-auto">
@@ -45,18 +53,31 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link " href="./dashboard-gebruiker.php">
+                            <a class="nav-link " href="./dashboard.php">
                                 <i class="ni ni-chart-pie-35 text-green"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="./stemmen.html">
-                                <i class="ni ni-box-2 text-red"></i>
-                                <span class="nav-link-text">Stemmen</span>
+                            <a class="nav-link active" href="./districten.php">
+                                <i class="ni ni-map-big text-red"></i>
+                                <span class="nav-link-text">Districten</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="./kandidaten.php">
+                                <i class="ni ni-badge text-green"></i>
+                                <span class="nav-link-text">Kandidaten</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="./partijen.php">
+                                <i class="fas fa-hands-helping text-red"></i>
+                                <span class="nav-link-text">Partijen</span>
                             </a>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -85,7 +106,7 @@
                                     <div class="media align-items-center">
                                         <i class="ni ni-circle-08 ni-2x"></i>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold">Jhon Snow</span>
+                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['user']; ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -122,42 +143,26 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Kandidaten</h3>
+                                    <h3 class="mb-0">Districten</h3>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <!-- Projects table -->
-                            <table class="table align-items-center table-flush">
+                        <div class="table-responsive py-4">
+                        <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Naam</th>
-                                        <th scope="col">Partij</th>
-                                        <th scope="col" style="width:30%">Action</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">District</th>
+                                    <th scope="col">Acties</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row ">
-                                            1
-                                        </th>
-                                        <td>
-                                            sfsdf
-                                        </td>
-                                        <td>
-                                            asdasd
-                                        </td>
-                                        <td>
-                                            VIEW
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </table>
+                            
                         </div>
                     </div>
                 </div>
+                <button type="button " class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
             </div>
             <!-- Footer -->
             <footer class="footer pt-0 ">
@@ -172,18 +177,53 @@
             </footer>
         </div>
     </div>
-    <!--Scripts -->
-    <!-- Core -->
-    <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
-    <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
-    <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
-    <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
-    <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
-    <!-- Optional JS -->
-    <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
-    <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
-    <!--JS -->
-    <script src="../assets/js/rs_verkiezingen.js "></script>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-default">Type your modal title</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="District" type="text">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Toevoegen</button>
+                        <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Scripts -->
+        <!-- Core -->
+        <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
+        <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
+        <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
+        <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
+        <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
+        <!-- Optional JS -->
+        <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
+        <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+        <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <!--JS -->
+        <script src="../assets/js/app.js "></script>
+        <script src="../assets/js/rs_verkiezingen.js "></script>
+        <script>
+            $(document).ready(function() {
+                fetchDistricten()
+
+            });
+        </script>
 </body>
 
 </html

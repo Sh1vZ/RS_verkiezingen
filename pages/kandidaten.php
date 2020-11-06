@@ -1,3 +1,7 @@
+<?php 
+      include '../assets/php/check.php';
+      session_start();
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>RS_verkiezingen | Partijen</title>
+    <title>RS_verkiezingen | Kandidaten</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
@@ -14,6 +18,7 @@
     <!-- Icons -->
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/vendor/select2/dist/css/select2.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
@@ -25,7 +30,7 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header d-flex align-items-center">
-                <a class="navbar-brand" href="../dashboard.php">
+                <a class="navbar-brand" href="./dashboard.php">
                     <h3><img src="../assets/img/brand/favicon.png" class="navbar-brand-img nav-img" alt="..."> RS_Verkiezingen</h3>
                 </a>
                 <div class="ml-auto">
@@ -51,19 +56,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./districten.html">
+                            <a class="nav-link" href="./districten.php">
                                 <i class="ni ni-map-big text-red"></i>
                                 <span class="nav-link-text">Districten</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./kandidaten.html">
+                            <a class="nav-link active" href="./kandidaten.php">
                                 <i class="ni ni-badge text-green"></i>
                                 <span class="nav-link-text">Kandidaten</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="./partijen.html">
+                            <a class="nav-link" href="./partijen.php">
                                 <i class="fas fa-hands-helping text-red"></i>
                                 <span class="nav-link-text">Partijen</span>
                             </a>
@@ -98,7 +103,7 @@
                                     <div class="media align-items-center">
                                         <i class="ni ni-circle-08 ni-2x"></i>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold">Jhon Snow</span>
+                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['user']; ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -135,7 +140,7 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Partijen</h3>
+                                    <h3 class="mb-0">Kandidaten</h3>
                                 </div>
 
                             </div>
@@ -147,6 +152,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Naam</th>
+                                        <th scope="col">Partij</th>
                                         <th scope="col" style="width:30%">Action</th>
                                     </tr>
                                 </thead>
@@ -159,6 +165,9 @@
                                             sfsdf
                                         </td>
                                         <td>
+                                            asdasd
+                                        </td>
+                                        <td>
                                             EDIT DELETE VIEW
                                         </td>
                                     </tr>
@@ -167,7 +176,10 @@
                         </div>
                     </div>
                 </div>
+
                 <button type="button " class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
+
+
             </div>
             <!-- Footer -->
             <footer class="footer pt-0 ">
@@ -194,32 +206,59 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <div class="input-group input-group-merge">
+                        <div class="input-group input-group-merge py-2">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-hands-helping"></i></span>
+                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                             </div>
-                            <input class="form-control" placeholder="Partij" type="text">
+                            <input class="form-control" placeholder="Naam" type="text">
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Toevoegen</button>
-                        <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
+                        <div class="input-group input-group-merge py-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Achternaam" type="text">
+                        </div>
+                        <div class="input-group input-group-merge py-2">
+                            <select class="form-control district" data-placeholder="Selecteer Partij" data-allow-clear="true" data-toggle="select">
+                                <option></option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                              </select>
+                            <div class="input-group input-group-merge py-2">
+                                <select class="form-control district" data-placeholder="Selecteer District" data-allow-clear="true" data-toggle="select">
+                                    <option></option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                    <option>F</option>
+                                  </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Toevoegen</button>
+                            <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Scripts -->
-        <!-- Core -->
-        <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
-        <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
-        <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
-        <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
-        <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
-        <!-- Optional JS -->
-        <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
-        <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
-        <!--JS -->
-        <script src="../assets/js/rs_verkiezingen.js "></script>
+            <!--Scripts -->
+            <!-- Core -->
+            <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
+            <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
+            <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
+            <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
+            <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
+            <script src="../assets/vendor/select2/dist/js/select2.min.js"></script>
+            <!-- Optional JS -->
+            <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
+            <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+            <!--JS -->
+            <script src="../assets/js/rs_verkiezingen.js "></script>
 </body>
 
 </html

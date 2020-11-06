@@ -1,10 +1,10 @@
-<?php 
-      include '../assets/php/conn.php';
-      include '../assets/php/check.php';
-      session_start();
- ?>
+<?php
+include '../assets/php/check.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,19 +56,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./districten.html">
+                            <a class="nav-link" href="./districten.php">
                                 <i class="ni ni-map-big text-red"></i>
                                 <span class="nav-link-text">Districten</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./kandidaten.html">
+                            <a class="nav-link" href="./kandidaten.php">
                                 <i class="ni ni-badge text-green"></i>
                                 <span class="nav-link-text">Kandidaten</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./partijen.html">
+                            <a class="nav-link" href="./partijen.php">
                                 <i class="fas fa-hands-helping text-red"></i>
                                 <span class="nav-link-text">Partijen</span>
                             </a>
@@ -103,7 +103,7 @@
                                     <div class="media align-items-center">
                                         <i class="ni ni-circle-08 ni-2x"></i>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold"><?=$_SESSION['user'];?></span>
+                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['user']; ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -284,7 +284,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">
-                                            /argon/charts.html
+                                            /argon/charts.php
                                         </th>
                                         <td>
                                             3,513
@@ -293,7 +293,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            /argon/charts.html
+                                            /argon/charts.php
                                         </th>
                                         <td>
                                             3,513
@@ -301,7 +301,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            /argon/charts.html
+                                            /argon/charts.php
                                         </th>
                                         <td>
                                             3,513

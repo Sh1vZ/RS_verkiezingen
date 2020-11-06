@@ -1,3 +1,7 @@
+<?php 
+      include '../assets/php/check.php';
+      session_start();
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>RS_verkiezingen | Districten</title>
+    <title>RS_verkiezingen | Home</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
@@ -25,7 +29,7 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header d-flex align-items-center">
-                <a class="navbar-brand" href="./dashboard.php">
+                <a class="navbar-brand" href="./dashboard-gebruiker.php">
                     <h3><img src="../assets/img/brand/favicon.png" class="navbar-brand-img nav-img" alt="..."> RS_Verkiezingen</h3>
                 </a>
                 <div class="ml-auto">
@@ -45,31 +49,18 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link " href="./dashboard.php">
+                            <a class="nav-link " href="./dashboard-gebruiker.php">
                                 <i class="ni ni-chart-pie-35 text-green"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="./districten.html">
-                                <i class="ni ni-map-big text-red"></i>
-                                <span class="nav-link-text">Districten</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./kandidaten.html">
-                                <i class="ni ni-badge text-green"></i>
-                                <span class="nav-link-text">Kandidaten</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./partijen.html">
-                                <i class="fas fa-hands-helping text-red"></i>
-                                <span class="nav-link-text">Partijen</span>
+                            <a class="nav-link active" href="./stemmen.php">
+                                <i class="ni ni-box-2 text-red"></i>
+                                <span class="nav-link-text">Stemmen</span>
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </div>
@@ -98,7 +89,7 @@
                                     <div class="media align-items-center">
                                         <i class="ni ni-circle-08 ni-2x"></i>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold">Jhon Snow</span>
+                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['ID_nummer']; ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -135,7 +126,7 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Districten</h3>
+                                    <h3 class="mb-0">Kandidaten</h3>
                                 </div>
 
                             </div>
@@ -146,7 +137,8 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">District</th>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">Partij</th>
                                         <th scope="col" style="width:30%">Action</th>
                                     </tr>
                                 </thead>
@@ -156,10 +148,13 @@
                                             1
                                         </th>
                                         <td>
+                                            sfsdf
+                                        </td>
+                                        <td>
                                             asdasd
                                         </td>
                                         <td>
-                                            EDIT DELETE VIEW
+                                            VIEW
                                         </td>
                                     </tr>
                                 </tbody>
@@ -167,11 +162,6 @@
                         </div>
                     </div>
                 </div>
-
-                <button type="button " class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
-
-
-
             </div>
             <!-- Footer -->
             <footer class="footer pt-0 ">
@@ -186,44 +176,18 @@
             </footer>
         </div>
     </div>
-
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Type your modal title</h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="input-group input-group-merge">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
-                            </div>
-                            <input class="form-control" placeholder="District" type="text">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Toevoegen</button>
-                        <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Scripts -->
-        <!-- Core -->
-        <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
-        <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
-        <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
-        <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
-        <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
-        <!-- Optional JS -->
-        <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
-        <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
-        <!--JS -->
-        <script src="../assets/js/rs_verkiezingen.js "></script>
+    <!--Scripts -->
+    <!-- Core -->
+    <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
+    <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
+    <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
+    <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
+    <!-- Optional JS -->
+    <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
+    <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+    <!--JS -->
+    <script src="../assets/js/rs_verkiezingen.js "></script>
 </body>
 
 </html

@@ -1,5 +1,4 @@
 <?php 
-      include '../assets/php/conn.php';
       include '../assets/php/check.php';
       session_start();
  ?>
@@ -57,7 +56,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./stemmen.html">
+                            <a class="nav-link" href="./stemmen.php">
                                 <i class="ni ni-box-2 text-red"></i>
                                 <span class="nav-link-text">Stemmen</span>
                             </a>

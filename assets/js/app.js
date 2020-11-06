@@ -1,3 +1,4 @@
+//---BEGIN LOGIN REGISTER---
 function Register() {
     var id = $("#id").val();
     var date = $("#date").val();
@@ -364,3 +365,39 @@ function Logout() {
     });
 
 }
+//---END LOGIN REGISTER
+function fetchDistricten() {
+
+    $('#datatable').DataTable({
+        'processing': true,
+        'serverSide': true,
+        "scrollX": false,
+        "responsive": true,
+        'serverMethod': 'post',
+        "scrollCollapse": false,
+        'keys': !0,
+        'select': {
+            'style': "multi"
+        },
+        'language': {
+            'paginate': {
+                'previous': "<i class='fas fa-angle-left'>",
+                'next': "<i class='fas fa-angle-right'>"
+            }
+        },
+        'ajax': {
+            'url': '../assets/php/fetch-districten.php'
+        },
+        'columns': [
+            { data: 'ID_district' },
+            { data: 'districtnaam' },
+            { data: 'action' },
+        ]
+
+    });
+
+
+}
+
+
+// fetchDistricten();
