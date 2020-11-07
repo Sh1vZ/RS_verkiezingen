@@ -1,51 +1,6 @@
 <?php
 require "conn.php";
 
-// $sql = "SELECT * FROM district";
-// $result = mysqli_query($conn, $sql);
-// $total_row = mysqli_num_rows($result);
-// $output = '
-// <table class="table align-items-center table-flush" id="table" data-plugin="dataTable">
-// <thead class="thead-light">
-//     <tr>
-//     <th scope="col">#</th>
-//     <th scope="col">District</th>
-//     <th scope="col" style="width:30%">Action</th>
-//     </tr>
-//     <thead>
-// ';
-// if ($total_row > 0) {
-//     $i = 1;
-//     foreach ($result as $row) {
-//         $a = $i++;
-//         $output .= '
-//         <tbody>
-//     <tr>
-//         <th scope="row">
-//             ' . $a . '
-//         </th>
-//         <td>
-//              ' . $row["districtnaam"] . '
-//         </td>
-//         <td>
-//              EDIT DELETE VIEW
-//         </td>
-//     </tr>
-//         <tbody>
-
-//         ';
-//     }
-// } else {
-//     $output .= '
-//     <tr>
-//         <td colspan="4" align="center">Data not found</td>
-//     </tr>
-//     ';
-// }
-// $output .= '</table> <script>$("#table").DataTable();</script>
-// ';
-// echo $output;
-
 ## Read value
 $draw = $_POST['draw'];
 $row = $_POST['start'];
@@ -75,20 +30,20 @@ $totalRecordwithFilter = $records['allcount'];
 $empQuery = "select * from district WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $empRecords = mysqli_query($conn, $empQuery);
 $data = array();
-$a=1;
+$a = 1;
 while ($row = mysqli_fetch_assoc($empRecords)) {
-$i=$a++;
+    $i = $a++;
     // Update Button
-    $updateButton = "<button class='btn btn-sm btn-info updateUser' data-id='" . $row['ID_district'] . "' data-toggle='modal' data-target='#updateModal' >Update</button>";
+    $updateButton = "<button class='btn btn-sm btn-info updateUser' onclick='editDistrict(" . $row['ID_district'] . ")' data-id='" . $row['ID_district'] . "'' >Update</button>";
 
     // Delete Button
-    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser' data-id='" . $row['ID_district'] . "'>Delete</button>";
+    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deleteDistrict(" . $row['ID_district'] . ")' data-id='" . $row['ID_district'] . "'>Delete</button>";
 
     $action = $updateButton . " " . $deleteButton;
     $data[] = array(
-        "ID_district" => $i,
+        "ID_district" => "$i",
         "districtnaam" => $row['districtnaam'],
-        "action" => $action
+        "action" => $action,
     );
 }
 

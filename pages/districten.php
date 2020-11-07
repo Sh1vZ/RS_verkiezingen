@@ -20,6 +20,8 @@ session_start();
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="./assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 
     <!-- Page plugins -->
@@ -111,7 +113,7 @@ session_start();
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#!" class="dropdown-item">
+                                    <a href="#" onclick="Logout()" class="dropdown-item">
                                         <i class="ni ni-user-run"></i>
                                         <span>Logout</span>
                                     </a>
@@ -149,16 +151,16 @@ session_start();
                             </div>
                         </div>
                         <div class="table-responsive py-4">
-                        <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
+                            <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
                                 <thead class="thead-light">
                                     <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">District</th>
-                                    <th scope="col">Acties</th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">District</th>
+                                        <th scope="col" style="width:15%">Acties</th>
                                     </tr>
                                 </thead>
                             </table>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -189,41 +191,49 @@ session_start();
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <div class="input-group input-group-merge">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                        <form action="" id="districten-form">
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="District" id="district-input" type="text">
                             </div>
-                            <input class="form-control" placeholder="District" type="text">
-                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Toevoegen</button>
+                        <button type="button" onclick="addDistrict()" class="btn btn-primary">Toevoegen</button>
                         <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!--Scripts -->
-        <!-- Core -->
-        <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
-        <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
-        <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
-        <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
-        <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
-        <!-- Optional JS -->
-        <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
-        <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
-        <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <!--JS -->
-        <script src="../assets/js/app.js "></script>
-        <script src="../assets/js/rs_verkiezingen.js "></script>
-        <script>
-            $(document).ready(function() {
-                fetchDistricten()
+    </div>
 
-            });
-        </script>
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+      
+    </div>
+    <!--Scripts -->
+    <!-- Core -->
+    <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
+    <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
+    <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
+    <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
+    <!-- Optional JS -->
+    <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
+    <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+    <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
+    <!--JS -->
+    <script src="../assets/js/app.js "></script>
+    <script src="../assets/js/rs_verkiezingen.js "></script>
+    <script>
+        $(document).ready(function() {
+            fetchDistricten()
+
+        });
+    </script>
 </body>
 
 </html

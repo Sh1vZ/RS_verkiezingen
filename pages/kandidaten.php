@@ -158,7 +158,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row ">
+                                        <th>
                                             1
                                         </th>
                                         <td>
