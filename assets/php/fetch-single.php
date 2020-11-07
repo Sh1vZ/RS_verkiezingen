@@ -26,7 +26,7 @@ if (isset($_POST['getDistrict'])) {
                                 </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" onclick="updateDistrict(<?= $id; ?>)" class="btn btn-primary">Edit</button>
+                            <button type="button" onclick="updateDistrict(<?= $id; ?>)" class="btn btn-primary">Bewerk</button>
                             <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
                         </div>
                         </form>

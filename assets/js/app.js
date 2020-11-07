@@ -652,8 +652,8 @@ function updateDistrict(e) {
 
             } else if (response == 'exist') {
                 Swal.fire({
-                    title: 'ID Bestaat al',
-                    text: 'Voer de correcte ID in',
+                    title: 'District Bestaat al',
+                    text: 'Voer een ander district in',
                     icon: 'error',
                     confirmButtonColor: '#2e8b57',
                     allowOutsideClick: false
