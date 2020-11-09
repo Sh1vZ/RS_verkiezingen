@@ -4,9 +4,10 @@ if (isset($_POST['insertdistrict'])) {
     $district = $_POST['district'];
     if (empty($district)) {
         echo 'errorEmpty';
-    } elseif (preg_match('~[0-9]~', $district)) {
+    } elseif (preg_match('~[0-9]~', $district||preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $district))) {
         echo 'errorDistrict';
-    } else {
+    }
+     else {
         $sql = "SELECT districtnaam FROM district WHERE districtnaam= ?";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -46,7 +47,7 @@ if (isset($_POST['updateDistrict'])) {
     $id = $_POST['id'];
     if (empty($district)) {
         echo 'errorEmpty';
-    } elseif (preg_match('~[0-9]~', $district)) {
+    } elseif (preg_match('~[0-9]~', $district)||preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $district)) {
         echo 'errorDistrict';
     } else {
         $sql = "SELECT districtnaam FROM district WHERE districtnaam= ?";

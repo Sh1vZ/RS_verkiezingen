@@ -22,7 +22,7 @@ if (isset($_POST['getDistrict'])) {
                         <div class="form-group">
                             <form action="" id="districten-form">
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control" placeholder="District" id="district-edit" value=<?= $naam; ?> type="text">
+                                    <input class="form-control" placeholder="District" id="district-edit" value='<?= $naam; ?>' type="text">
                                 </div>
                         </div>
                         <div class="modal-footer">
@@ -34,7 +34,48 @@ if (isset($_POST['getDistrict'])) {
                 </div>
             </div>
 
-<?php
+        <?php
+        }
+    }
+}
+
+if (isset($_POST['getPartij'])) {
+    $id = $_POST['id'];
+    $sql = "SELECT * FROM partij WHERE ID_partij=$id";
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) > 0) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $naamp   = $row['Partijnaam'];
+            $afkorting   = $row['Partijafkorting'];
+            $id   = $row['ID_partij'];
+        ?>
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-default">Edit District</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <form action="" id="districten-form">
+                                <div class="input-group input-group-merge py-2">
+                                    <input class="form-control" placeholder="District" id="partij-edit" value='<?= $naamp ?>' type="text">
+                                </div>
+                                <div class="input-group input-group-merge">
+                                    <input class="form-control" placeholder="District" id="afkorting-edit" value='<?= $afkorting; ?>' type="text">
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="updatePartij(<?= $id; ?>)" class="btn btn-primary">Bewerk</button>
+                            <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+    <?php
         }
     }
 }

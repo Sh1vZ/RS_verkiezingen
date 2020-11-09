@@ -1,3 +1,76 @@
+//BEGIN GLOBAL ERROR MESSAGES
+function existMessage() {
+    Swal.fire({
+        title: 'Ingevoerde gegevens bestaan al',
+        text: 'Voer  iets anders in',
+        icon: 'error',
+        confirmButtonColor: '#2e8b57',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+    })
+}
+
+function emptyMessage() {
+    Swal.fire({
+        title: 'Vul alles in!',
+        text: 'Niet alles in ingevuld',
+        icon: 'error',
+        confirmButtonColor: '#2e8b57',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+    })
+}
+
+function fatalerrorMessage() {
+    Swal.fire({
+        title: 'Fatal Error',
+        text: 'Something is wrong',
+        icon: 'error',
+        confirmButtonColor: '#2e8b57',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+    })
+}
+
+function sqlerrorMessage() {
+    Swal.fire({
+        title: 'Database Error',
+        text: 'Something is wrong',
+        icon: 'error',
+        confirmButtonColor: '#2e8b57',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+    })
+}
+
+function errorInput() {
+    Swal.fire({
+        title: 'Ingevoerde gegevens kloppen niet',
+        text: 'Ingevoerde gegevens mag geen nummer of speciaal character hebben',
+        icon: 'error',
+        confirmButtonColor: '#2e8b57',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+    })
+}
+
+//---END GLOBAL ERROR MESSAGES
+
 //---BEGIN LOGIN REGISTER---
 function Register() {
     var id = $("#id").val();
@@ -457,6 +530,7 @@ function deleteDistrict(e) {
     })
 }
 
+
 function addDistrict() {
     var district = $("#district-input").val();
 
@@ -470,65 +544,15 @@ function addDistrict() {
         beforeSend: function() {},
         success: function(response) {
             if (response == "exist") {
-                Swal.fire({
-                    title: 'District bestaat al',
-                    text: 'Voer in iets anders',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                existMessage();
             } else if (response == "errorEmpty") {
-                Swal.fire({
-                    title: 'Vul alles in!',
-                    text: 'Niet alles in ingevuld',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                emptyMessage();
             } else if (response == "fatalError") {
-                Swal.fire({
-                    title: 'Fatal Error',
-                    text: 'Something is wrong',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                fatalerrorMessage()
             } else if (response == "sqlError") {
-                Swal.fire({
-                    title: 'Database Error',
-                    text: 'Something is wrong',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                sqlerrorMessage()
             } else if (response == "errorDistrict") {
-                Swal.fire({
-                    title: 'Ingevoerde district klopt niet',
-                    text: 'Districtnaam mag geen nummers hebben',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                errorInput()
             } else if (response == "success") {
                 Swal.fire({
                     title: 'Successvol',
@@ -587,53 +611,13 @@ function updateDistrict(e) {
         },
         success: function(response) {
             if (response == "errorEmpty") {
-                Swal.fire({
-                    title: 'Vul alles in!',
-                    text: 'Niet alles in ingevuld',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                emptyMessage()
             } else if (response == "fatalError") {
-                Swal.fire({
-                    title: 'Fatal Error',
-                    text: 'Something is wrong',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                fatalerrorMessage()
             } else if (response == "sqlError") {
-                Swal.fire({
-                    title: 'Database Error',
-                    text: 'Something is wrong',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                sqlerrorMessage()
             } else if (response == "errorDistrict") {
-                Swal.fire({
-                    title: 'Ingevoerde district klopt niet',
-                    text: 'Districtnaam mag geen nummers hebben',
-                    icon: 'error',
-                    confirmButtonColor: '#2e8b57',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                })
+                errorInput()
             } else if (response == "success") {
                 Swal.fire({
                     title: 'Successvol',
@@ -651,16 +635,214 @@ function updateDistrict(e) {
                 $('#datatable').DataTable().ajax.reload();
 
             } else if (response == 'exist') {
+                existMessage();
+            }
+        }
+    })
+}
+//--- END DISTRICTEN
+
+//BEGIN PARTIJEN
+function fetchPartijen() {
+
+    $('#datatable').DataTable({
+        'processing': true,
+        'serverSide': true,
+        "responsive": true,
+        'serverMethod': 'post',
+        "scrollCollapse": false,
+        'keys': !0,
+        'select': {
+            'style': "multi"
+        },
+        'language': {
+            'paginate': {
+                'previous': "<i class='fas fa-angle-left'>",
+                'next': "<i class='fas fa-angle-right'>"
+            },
+            'processing': 'loading'
+        },
+        'ajax': {
+            'url': '../assets/php/fetch-partijen.php'
+        },
+        'columns': [
+            { data: 'ID_partij' },
+            { data: 'Partijnaam' },
+            { data: 'Partijafkorting' },
+            { data: 'action' },
+        ],
+        "columnDefs": [
+            { "orderable": false, "targets": [2, 0] }
+        ]
+
+    });
+    $('#datatable').css("width", "100%");
+
+}
+
+function addPartij() {
+    var partij = $("#partij").val();
+    var afkorting = $("#afkorting").val();
+
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/partijen-crud.php',
+        data: {
+            partij: partij,
+            afkorting: afkorting,
+            insertpartij: 1
+        },
+        beforeSend: function() {},
+        success: function(response) {
+            if (response == "exist") {
+                existMessage()
+            } else if (response == "errorEmpty") {
+                emptyMessage();
+            } else if (response == "fatalError") {
+                fatalerrorMessage()
+            } else if (response == "sqlError") {
+                sqlerrorMessage()
+            } else if (response == "errorPartij") {
+                errorInput()
+            } else if (response == "success") {
                 Swal.fire({
-                    title: 'District Bestaat al',
-                    text: 'Voer een ander district in',
-                    icon: 'error',
+                    title: 'Successvol',
+                    text: "District succesvol ingevoerd",
+                    icon: 'success',
+                    showDenyButton: true,
                     confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'Meer toevoegen?',
+                    denyButtonText: 'Sluiten?',
                     allowOutsideClick: false
                 }).then((result) => {
-                    if (result.isConfirmed) {}
+                    if (result.isConfirmed) {
+                        // window.location = '../index.php'
+                    } else if (result.isDenied) {
+                        $('#modal').modal('toggle');
+
+                    }
                 })
+                $('#partij-form').trigger("reset");
+                $('#datatable').DataTable().ajax.reload();
+
             }
+
+
+        }
+    })
+
+}
+
+function editPartij(e) {
+    var id = e;
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/fetch-single.php',
+        data: {
+            id: id,
+            getPartij: 1
+        },
+        success: function(response) {
+            $('#modalEdit').html(response);
+            $('#modalEdit').modal('toggle');
+        }
+    })
+}
+
+function updatePartij(e) {
+    var id = e;
+    var partij = $("#partij-edit").val();
+    var afkorting = $("#afkorting-edit").val();
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/partijen-crud.php',
+        data: {
+            id: id,
+            partij: partij,
+            afkorting: afkorting,
+            updatePartij: 1
+        },
+        success: function(response) {
+            if (response == "errorEmpty") {
+                emptyMessage()
+            } else if (response == "fatalError") {
+                fatalerrorMessage()
+            } else if (response == "sqlError") {
+                sqlerrorMessage()
+            } else if (response == "errorPartij") {
+                errorInput()
+            } else if (response == "success") {
+                Swal.fire({
+                    title: 'Successvol',
+                    text: "Partij succesvol Bijgewerkt",
+                    icon: 'success',
+                    confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#modalEdit').modal('toggle');
+                    }
+                })
+                $('#districten-form-edit').trigger("reset");
+                $('#datatable').DataTable().ajax.reload();
+
+            } else if (response == 'exist') {
+                existMessage();
+            }
+        }
+    })
+}
+
+function deletePartij(e) {
+    var id = e;
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Bent u zeker?',
+        text: "U kunt dit niet ongedaan maken!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ja, Verwijder het!',
+        cancelButtonText: 'Annuleren!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: '../assets/php/partijen-crud.php',
+                data: {
+                    id: id,
+                    delete: 1
+                },
+                success: function(response) {
+                    if (response == 'success') {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Verwijderd.',
+                            'success'
+                        )
+                        $('#datatable').DataTable().ajax.reload();
+                    }
+                }
+            })
+
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'alles is OK',
+                'error'
+            )
         }
     })
 }

@@ -1,7 +1,7 @@
-<?php 
-      include '../assets/php/check.php';
-      session_start();
- ?>
+<?php
+include '../assets/php/check.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,6 +18,10 @@
     <!-- Icons -->
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
@@ -107,7 +111,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#!" class="dropdown-item">
+                                    <a href="" onclick='Logout()' class="dropdown-item">
                                         <i class="ni ni-user-run"></i>
                                         <span>Logout</span>
                                     </a>
@@ -144,30 +148,18 @@
 
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <!-- Projects table -->
-                            <table class="table align-items-center table-flush">
+                        <div class="table-responsive py-4">
+                            <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Naam</th>
-                                        <th scope="col" style="width:30%">Action</th>
+                                        <th scope="col">Partij Naam</th>
+                                        <th scope="col">Afkorting</th>
+                                        <th scope="col" style="width:15%">Acties</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row ">
-                                            1
-                                        </th>
-                                        <td>
-                                            sfsdf
-                                        </td>
-                                        <td>
-                                            EDIT DELETE VIEW
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -193,25 +185,39 @@
                 <div class="modal-header">
                     <h6 class="modal-title" id="modal-title-default">Type your modal title</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <div class="input-group input-group-merge">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-hands-helping"></i></span>
+                    <form role="form" id="partij-form">
+                        <div class="form-group mb-3">
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-hands-helping"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Partij Naam" id="partij" type="text">
                             </div>
-                            <input class="form-control" placeholder="Partij" type="text">
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Toevoegen</button>
-                        <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
-                    </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-hands-helping"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Partij Afkorting" id="afkorting" type="text">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="addPartij()" >Toevoegen</button>
+                            <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+        <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+      
+    </div>
         <!--Scripts -->
         <!-- Core -->
         <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
@@ -222,8 +228,18 @@
         <!-- Optional JS -->
         <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
         <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+        <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
         <!--JS -->
+        <script src="../assets/js/app.js "></script>
         <script src="../assets/js/rs_verkiezingen.js "></script>
+        <script>
+            $(document).ready(function() {
+                fetchPartijen()
+
+            });
+        </script>
 </body>
 
 </html
