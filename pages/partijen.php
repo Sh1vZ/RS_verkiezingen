@@ -111,7 +111,7 @@ session_start();
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="" onclick='Logout()' class="dropdown-item">
+                                    <a href="#" onclick='Logout()' class="dropdown-item">
                                         <i class="ni ni-user-run"></i>
                                         <span>Logout</span>
                                     </a>

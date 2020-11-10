@@ -1,4 +1,14 @@
 //BEGIN GLOBAL ERROR MESSAGES
+
+function PreviewImage() {
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(document.getElementById("customFileLang").files[0]);
+
+    oFReader.onload = function(oFREvent) {
+        document.getElementById("uploadPreview").src = oFREvent.target.result;
+    };
+};
+
 function existMessage() {
     Swal.fire({
         title: 'Ingevoerde gegevens bestaan al',
@@ -672,7 +682,7 @@ function fetchPartijen() {
             { data: 'action' },
         ],
         "columnDefs": [
-            { "orderable": false, "targets": [2, 0] }
+            { "orderable": false, "targets": [0, 3] }
         ]
 
     });
@@ -843,6 +853,127 @@ function deletePartij(e) {
                 'alles is OK',
                 'error'
             )
+        }
+    })
+}
+//--- END Partijen
+
+// BEGIN KANDIDATEN
+
+// function fetchKandidaten() {
+
+//     $('#datatable').DataTable({
+//         'processing': true,
+//         'serverSide': true,
+//         "responsive": true,
+//         'serverMethod': 'post',
+//         "scrollCollapse": false,
+//         'keys': !0,
+//         'select': {
+//             'style': "multi"
+//         },
+//         'language': {
+//             'paginate': {
+//                 'previous': "<i class='fas fa-angle-left'>",
+//                 'next': "<i class='fas fa-angle-right'>"
+//             },
+//             'processing': 'loading'
+//         },
+//         'ajax': {
+//             'url': '../assets/php/fetch-kandidaten.php'
+//         },
+//         'columns': [
+//             { data: 'ID_kandidaten' },
+//             { data: 'image' },
+//             { data: 'acternaam' },
+//             { data: 'voornaam' },
+//             { data: 'partij' },
+//             { data: 'district' },
+//             { data: 'action' },
+//         ],
+//         "columnDefs": [
+//             { "orderable": false, "targets": [2, 0] }
+//         ]
+
+//     });
+//     $('#datatable').css("width", "100%");
+
+// }
+
+$("#form-kandidaat").on('submit', (function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: "../assets/php/kandidaten-crud.php",
+        type: "POST",
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function() {},
+        success: function(data) {
+            if (data == 'success') {
+                Swal.fire({
+                    title: 'Successvol',
+                    text: "District succesvol ingevoerd",
+                    icon: 'success',
+                    showDenyButton: true,
+                    confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'Meer toevoegen?',
+                    denyButtonText: 'Sluiten?',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                    } else if (result.isDenied) {
+                        $('#modal').modal('toggle');
+
+                    }
+                })
+                $('#partij-form').trigger("reset");
+                $('#datatable').DataTable().ajax.reload();
+
+            }
+        },
+    });
+}));
+
+function addKandidaat() {
+    var achternaam = $("#achternaam").val();
+    var voornaam = $("#voornaam").val();
+    var partij = $("#partij").val();
+    var district = $("#district").val();
+    var file_data = $('#customFileLang').prop('files')[0];
+    var form_data = new FormData();
+    form_data.append('file', file_data);
+    $.ajax({
+        type: 'POST',
+        dataType: 'text', // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        url: '../assets/php/kandidaten-crud.php',
+        data: {
+            form_data,
+            insertkandidaat: 1
+        },
+        beforeSend: function() {},
+        success: function(response) {
+            if (response == "exist") {
+                existMessage()
+            } else if (response == "errorEmpty") {
+                emptyMessage();
+            } else if (response == "fatalError") {
+                fatalerrorMessage()
+            } else if (response == "sqlError") {
+                sqlerrorMessage()
+            } else if (response == "errorPartij") {
+                errorInput()
+            } else if (response == "success") {
+
+
+            }
+
+
         }
     })
 }

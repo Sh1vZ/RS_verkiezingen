@@ -13,38 +13,41 @@ $searchValue = mysqli_real_escape_string($conn, $_POST['search']['value']); // S
 ## Search 
 $searchQuery = " ";
 if ($searchValue != '') {
-    $searchQuery = " and (Partijnaam like '%" . $searchValue . "%' or 
-    Partijafkorting like '%".$searchValue."%') ";
+    $searchQuery = " and (achternaam like '%" . $searchValue . "%') ";
 }
 
 ## Total number of records without filtering
-$sel = mysqli_query($conn, "select count(*) as allcount from partij");
+$sel = mysqli_query($conn, "select count(*) as allcount from kandidaten");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 ## Total number of record with filtering
-$sel = mysqli_query($conn, "select count(*) as allcount from partij WHERE 1 " . $searchQuery);
+$sel = mysqli_query($conn, "select count(*) as allcount from kandidaten WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$empQuery = "select * from partij WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$empQuery = "select * from kandidaten WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $empRecords = mysqli_query($conn, $empQuery);
 $data = array();
 $a = 1;
 while ($row = mysqli_fetch_assoc($empRecords)) {
     $i = $a++;
+    $img=$row['img'];
     // Update Button
-    $updateButton = "<button class='btn btn-sm btn-info updateUser' onclick='editPartij(" . $row['ID_partij'] . ")' data-id='" . $row['ID_partij'] . "'' >Update</button>";
+    $updateButton = "<button class='btn btn-sm btn-info updateUser' onclick='editkandidaten(" . $row['ID_kandidaten'] . ")' data-id='" . $row['ID_kandidaten'] . "'' >Update</button>";
 
     // Delete Button
-    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deletePartij(" . $row['ID_partij'] . ")' data-id='" . $row['ID_partij'] . "'>Delete</button>";
+    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deletekandidaten(" . $row['ID_kandidaten'] . ")' data-id='" . $row['ID_kandidaten'] . "'>Delete</button>";
 
     $action = $updateButton . " " . $deleteButton;
     $data[] = array(
-        "ID_partij" => $i,
-        "Partijnaam" => $row['Partijnaam'],
-        "Partijafkorting" => $row['Partijafkorting'],
+        "ID_kandidaten" => $i,
+        "image" => "<img class='display-img' src='../assets/uploads/$img'  width='125' height='125'   >",
+        "acternaam" => $row['achternaam'],
+        "voornaam" => $row['voornaam'],
+        "partij" => $row['ID_partij'],
+        "district" => $row['ID_district'],
         "action" => $action,
     );
 }

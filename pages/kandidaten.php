@@ -1,7 +1,7 @@
-<?php 
-      include '../assets/php/check.php';
-      session_start();
- ?>
+<?php
+include '../assets/php/check.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
@@ -108,8 +112,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#!" class="dropdown-item">
-                                        <i class="ni ni-user-run"></i>
+                                    <a href="#" onclick="Logout()" class="dropdown-item"> <i class="ni ni-user-run"></i>
                                         <span>Logout</span>
                                     </a>
                                 </div>
@@ -146,32 +149,20 @@
                             </div>
                         </div>
                         <div class="table-responsive">
+                          
                             <!-- Projects table -->
-                            <table class="table align-items-center table-flush">
+                            <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Naam</th>
+                                        <th scope="col">Foto</th>
+                                        <th scope="col">Achternaam</th>
+                                        <th scope="col">Voornaam</th>
                                         <th scope="col">Partij</th>
-                                        <th scope="col" style="width:30%">Action</th>
+                                        <th scope="col">District</th>
+                                        <th scope="col" style="width:15%">Acties</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            1
-                                        </th>
-                                        <td>
-                                            sfsdf
-                                        </td>
-                                        <td>
-                                            asdasd
-                                        </td>
-                                        <td>
-                                            EDIT DELETE VIEW
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -179,7 +170,7 @@
 
                 <button type="button " class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
 
-
+                
             </div>
             <!-- Footer -->
             <footer class="footer pt-0 ">
@@ -199,51 +190,67 @@
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Type your modal title</h6>
+                    <h6 class="modal-title" id="modal-title-default">Kandidaat</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <div class="input-group input-group-merge py-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                    <form action="../assets/php/kandidaten-crud.php" method="POST" id="form-kandidaat" enctype="multipart/form-data">
+                        <div class="form-group mb-3">
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-hands-helping"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Voornaam" id="voornaam" name="voornaam" type="text">
                             </div>
-                            <input class="form-control" placeholder="Naam" type="text">
                         </div>
-                        <div class="input-group input-group-merge py-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                        <div class="form-group">
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-hands-helping"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Achternaam" id="achternaam" name="achternaam" type="text">
                             </div>
-                            <input class="form-control" placeholder="Achternaam" type="text">
                         </div>
-                        <div class="input-group input-group-merge py-2">
-                            <select class="form-control district" data-placeholder="Selecteer Partij" data-allow-clear="true" data-toggle="select">
+                        <div class="input-group input-group-merge">
+                            <select class="form-control district" data-placeholder="Selecteer Partij" id="partij" name="partij" data-allow-clear="true" data-toggle="select">
                                 <option></option>
-                                <option>B</option>
-                                <option>C</option>
-                                <option>D</option>
-                                <option>E</option>
-                                <option>F</option>
-                              </select>
-                            <div class="input-group input-group-merge py-2">
-                                <select class="form-control district" data-placeholder="Selecteer District" data-allow-clear="true" data-toggle="select">
-                                    <option></option>
-                                    <option>B</option>
-                                    <option>C</option>
-                                    <option>D</option>
-                                    <option>E</option>
-                                    <option>F</option>
-                                  </select>
-                            </div>
-
+                                <?php
+                                include '../assets/php/conn.php';
+                                $sql    = "SELECT * FROM partij";
+                                $result = mysqli_query($conn, $sql);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='" . $row['ID_partij'] . "'>" . $row['Partijnaam'] . " (" . $row['Partijafkorting'] . ")</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
+                        <div class="input-group input-group-merge py-2">
+                            <select class="form-control district" data-placeholder="Selecteer District" id="district" name="district" data-allow-clear="true" data-toggle="select">
+                                <option></option>
+                                <?php
+                                include '../assets/php/conn.php';
+                                $sql    = "SELECT * FROM district";
+                                $result = mysqli_query($conn, $sql);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='" . $row['ID_district'] . "'>" . $row['districtnaam'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <label class="form-control-label" for="customFileLang">Kandidaat Foto</label>
+                        <div class="custom-file ">
+
+                            <input type="file" class="custom-file-input" id="customFileLang" name='image' lang="en" onchange="PreviewImage()">
+                            <label class="custom-file-label" for="customFileLang">Selecteer Kandidaat foto</label>
+                        </div>
+                        <img id="uploadPreview" style="width: 50%; height: 50%;  display: block;   margin-left: auto;   margin-right: auto; margin-top:5%;" />
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Toevoegen</button>
+                            <button type="submit" class="btn btn-primary">Toevoegen</button>
                             <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!--Scripts -->
@@ -257,8 +264,19 @@
             <!-- Optional JS -->
             <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
             <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+            <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+            <script src="../assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
             <!--JS -->
+            <script src="../assets/js/app.js "></script>
             <script src="../assets/js/rs_verkiezingen.js "></script>
+            <script>
+                $(document).ready(function(e) {
+                    fetchKandidaten()
+                  
+                });
+            </script>
 </body>
 
 </html

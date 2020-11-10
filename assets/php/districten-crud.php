@@ -4,7 +4,10 @@ if (isset($_POST['insertdistrict'])) {
     $district = $_POST['district'];
     if (empty($district)) {
         echo 'errorEmpty';
-    } elseif (preg_match('~[0-9]~', $district||preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $district))) {
+    } elseif (preg_match('~[0-9]~', $district)) {
+        echo 'errorDistrict';
+    }
+     elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $district)) {
         echo 'errorDistrict';
     }
      else {
@@ -33,6 +36,7 @@ if (isset($_POST['insertdistrict'])) {
         }
     }
 }
+
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM district WHERE ID_district=$id";
