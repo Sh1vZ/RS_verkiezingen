@@ -6,18 +6,18 @@ require "conn.php";
 
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
-    $img='';
-    $sql1 = "DELETE FROM kandidaten WHERE ID_kandidaten=$id";
-    $res1 = mysqli_query($conn, $sql1);
-    $sql    = "SELECT * FROM kandidaten";
+    $sql    = "SELECT * FROM kandidaten WHERE ID_kandidaten=$id";
     $result = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-        $img=$row['img'];
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $img = $row['img'];
+            unlink("../uploads/" . $img);
+            $sql1 = "DELETE FROM kandidaten WHERE ID_kandidaten=$id";
+            $res=mysqli_query($conn,$sql1);
+            echo 'success';
+        }
     }
-    // $file_pointer = "../uploads/$img";
-    unlink(realpath("../uploads/".$img));
-    // echo $img;
-    }
+}
 
 
 
