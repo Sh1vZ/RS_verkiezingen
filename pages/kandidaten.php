@@ -242,12 +242,12 @@ session_start();
                         <label class="form-control-label" for="customFileLang">Kandidaat Foto</label>
                         <div class="custom-file ">
 
-                            <input type="file" class="custom-file-input" id="customFileLang" name='image' lang="en" onchange="PreviewImage()">
+                            <input type="file" class="custom-file-input" id="customFileLang" name='image' lang="en" accept="image/*" onchange="PreviewImage()">
                             <label class="custom-file-label" for="customFileLang">Selecteer Kandidaat foto</label>
                         </div>
                         <img id="uploadPreview" style="width: 50%; height: 50%;  display: block;   margin-left: auto;   margin-right: auto; margin-top:5%;" />
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Toevoegen</button>
+                            <button type="submit" name='submit' class="btn btn-primary">Toevoegen</button>
                             <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
                         </div>
                     </form>

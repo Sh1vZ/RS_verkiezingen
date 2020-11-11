@@ -892,7 +892,7 @@ function fetchKandidaten() {
             { data: 'action' },
         ],
         "columnDefs": [
-            { "orderable": false, "targets": [2, 0] }
+            { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6] }
         ]
 
     });
@@ -903,18 +903,18 @@ function fetchKandidaten() {
 $("#form-kandidaat").on('submit', (function(e) {
     e.preventDefault();
     $.ajax({
-        url: "../assets/php/kandidaten-crud.php",
+        url: "../assets/php/kandidaten-insert.php",
         type: "POST",
         data: new FormData(this),
         contentType: false,
         cache: false,
         processData: false,
         beforeSend: function() {},
-        success: function(data) {
-            if (data == 'success') {
+        success: function(response) {
+            if (response == 'success') {
                 Swal.fire({
                     title: 'Successvol',
-                    text: "District succesvol ingevoerd",
+                    text: "Kandidaat succesvol ingevoerd",
                     icon: 'success',
                     showDenyButton: true,
                     confirmButtonColor: '#2e8b57',
@@ -923,19 +923,86 @@ $("#form-kandidaat").on('submit', (function(e) {
                     allowOutsideClick: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-
+                        $('#form-kandidaat').trigger("reset");
+                        $('#district').val(null).trigger('change');
+                        $('#partij').val(null).trigger('change');
+                        $('#uploadPreview').attr('src', '');;
                     } else if (result.isDenied) {
+                        $('#form-kandidaat').trigger("reset");
+                        $('#district').val(null).trigger('change');
+                        $('#partij').val(null).trigger('change');
+                        $('#uploadPreview').attr('src', '');;
                         $('#modal').modal('toggle');
 
                     }
                 })
-                $('#partij-form').trigger("reset");
+                $('#form-kandidaat').trigger("reset");
                 $('#datatable').DataTable().ajax.reload();
 
+            } else if (response == "errorEmpty") {
+                emptyMessage();
+            } else if (response == "errorPartij") {
+                errorInput();
             }
         },
     });
 }));
+
+
+function deleteKandidaat(e) {
+
+    var id = e;
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Bent u zeker?',
+        text: "U kunt dit niet ongedaan maken!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ja, Verwijder het!',
+        cancelButtonText: 'Annuleren!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: '../assets/php/kandidaten-crud.php',
+                data: {
+                    id: id,
+                    delete: 1
+                },
+                success: function(response) {
+                    if (response == 'success') {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Verwijderd.',
+                            'success'
+                        )
+                        $('#datatable').DataTable().ajax.reload();
+                    }
+                }
+            })
+
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'alles is OK',
+                'error'
+            )
+        }
+    })
+
+}
 
 // function addKandidaat() {
 //     var achternaam = $("#achternaam").val();
