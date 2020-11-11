@@ -860,45 +860,45 @@ function deletePartij(e) {
 
 // BEGIN KANDIDATEN
 
-// function fetchKandidaten() {
+function fetchKandidaten() {
 
-//     $('#datatable').DataTable({
-//         'processing': true,
-//         'serverSide': true,
-//         "responsive": true,
-//         'serverMethod': 'post',
-//         "scrollCollapse": false,
-//         'keys': !0,
-//         'select': {
-//             'style': "multi"
-//         },
-//         'language': {
-//             'paginate': {
-//                 'previous': "<i class='fas fa-angle-left'>",
-//                 'next': "<i class='fas fa-angle-right'>"
-//             },
-//             'processing': 'loading'
-//         },
-//         'ajax': {
-//             'url': '../assets/php/fetch-kandidaten.php'
-//         },
-//         'columns': [
-//             { data: 'ID_kandidaten' },
-//             { data: 'image' },
-//             { data: 'acternaam' },
-//             { data: 'voornaam' },
-//             { data: 'partij' },
-//             { data: 'district' },
-//             { data: 'action' },
-//         ],
-//         "columnDefs": [
-//             { "orderable": false, "targets": [2, 0] }
-//         ]
+    $('#datatable').DataTable({
+        'processing': true,
+        'serverSide': true,
+        "responsive": true,
+        'serverMethod': 'post',
+        "scrollCollapse": false,
+        'keys': !0,
+        'select': {
+            'style': "multi"
+        },
+        'language': {
+            'paginate': {
+                'previous': "<i class='fas fa-angle-left'>",
+                'next': "<i class='fas fa-angle-right'>"
+            },
+            'processing': 'loading'
+        },
+        'ajax': {
+            'url': '../assets/php/fetch-kandidaten.php'
+        },
+        'columns': [
+            { data: 'ID_kandidaten' },
+            { data: 'image' },
+            { data: 'acternaam' },
+            { data: 'voornaam' },
+            { data: 'partij' },
+            { data: 'district' },
+            { data: 'action' },
+        ],
+        "columnDefs": [
+            { "orderable": false, "targets": [2, 0] }
+        ]
 
-//     });
-//     $('#datatable').css("width", "100%");
+    });
+    $('#datatable').css("width", "100%");
 
-// }
+}
 
 $("#form-kandidaat").on('submit', (function(e) {
     e.preventDefault();
@@ -937,43 +937,43 @@ $("#form-kandidaat").on('submit', (function(e) {
     });
 }));
 
-function addKandidaat() {
-    var achternaam = $("#achternaam").val();
-    var voornaam = $("#voornaam").val();
-    var partij = $("#partij").val();
-    var district = $("#district").val();
-    var file_data = $('#customFileLang').prop('files')[0];
-    var form_data = new FormData();
-    form_data.append('file', file_data);
-    $.ajax({
-        type: 'POST',
-        dataType: 'text', // what to expect back from the PHP script, if anything
-        cache: false,
-        contentType: false,
-        processData: false,
-        url: '../assets/php/kandidaten-crud.php',
-        data: {
-            form_data,
-            insertkandidaat: 1
-        },
-        beforeSend: function() {},
-        success: function(response) {
-            if (response == "exist") {
-                existMessage()
-            } else if (response == "errorEmpty") {
-                emptyMessage();
-            } else if (response == "fatalError") {
-                fatalerrorMessage()
-            } else if (response == "sqlError") {
-                sqlerrorMessage()
-            } else if (response == "errorPartij") {
-                errorInput()
-            } else if (response == "success") {
+// function addKandidaat() {
+//     var achternaam = $("#achternaam").val();
+//     var voornaam = $("#voornaam").val();
+//     var partij = $("#partij").val();
+//     var district = $("#district").val();
+//     var file_data = $('#customFileLang').prop('files')[0];
+//     var form_data = new FormData();
+//     form_data.append('file', file_data);
+//     $.ajax({
+//         type: 'POST',
+//         dataType: 'text', // what to expect back from the PHP script, if anything
+//         cache: false,
+//         contentType: false,
+//         processData: false,
+//         url: '../assets/php/kandidaten-crud.php',
+//         data: {
+//             form_data,
+//             insertkandidaat: 1
+//         },
+//         beforeSend: function() {},
+//         success: function(response) {
+//             if (response == "exist") {
+//                 existMessage()
+//             } else if (response == "errorEmpty") {
+//                 emptyMessage();
+//             } else if (response == "fatalError") {
+//                 fatalerrorMessage()
+//             } else if (response == "sqlError") {
+//                 sqlerrorMessage()
+//             } else if (response == "errorPartij") {
+//                 errorInput()
+//             } else if (response == "success") {
 
 
-            }
+//             }
 
 
-        }
-    })
-}
+//         }
+//     })
+// }
