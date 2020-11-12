@@ -1,11 +1,20 @@
 //BEGIN GLOBAL ERROR MESSAGES
-
 function PreviewImage() {
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("customFileLang").files[0]);
 
     oFReader.onload = function(oFREvent) {
         document.getElementById("uploadPreview").src = oFREvent.target.result;
+    };
+};
+
+function PreviewImage1() {
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(document.getElementById("customFileLang1").files[0]);
+
+    oFReader.onload = function(oFREvent) {
+        document.getElementById("uploadPreview1").src = oFREvent.target.result;
+        $('#txt').html("");
     };
 };
 
@@ -27,6 +36,20 @@ function emptyMessage() {
     Swal.fire({
         title: 'Vul alles in!',
         text: 'Niet alles in ingevuld',
+        icon: 'error',
+        confirmButtonColor: '#2e8b57',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+    })
+}
+
+function imgMessage() {
+    Swal.fire({
+        title: 'Foto is niet goed!',
+        text: 'Foto formaat is niet goed alleen jpeg,jpg en png ',
         icon: 'error',
         confirmButtonColor: '#2e8b57',
         allowOutsideClick: false
@@ -941,12 +964,59 @@ $("#form-kandidaat").on('submit', (function(e) {
 
             } else if (response == "errorEmpty") {
                 emptyMessage();
+            } else if (response == "errorImage") {
+                imgMessage();
+            } else if (response == "errorEmpty") {
+                emptyMessage();
             } else if (response == "errorPartij") {
                 errorInput();
             }
         },
     });
 }));
+
+
+
+$("#form-kandidaat-edit").on('submit', (function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: "../assets/php/kandidaten-update.php",
+        type: "POST",
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function() {},
+        success: function(response) {
+            if (response == 'success') {
+                Swal.fire({
+                    title: 'Successvol',
+                    text: "Kandidaat succesvol Bijgewerkt",
+                    icon: 'success',
+                    confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#modalEdit').modal('toggle');
+                    }
+                })
+                $('#districten-form-edit').trigger("reset");
+                $('#datatable').DataTable().ajax.reload();
+            } else if (response == "errorEmpty") {
+                emptyMessage();
+            } else if (response == "errorImage") {
+                imgMessage();
+            } else if (response == "errorEmpty") {
+                emptyMessage();
+            } else if (response == "errorPartij") {
+                errorInput();
+            }
+        },
+    });
+}));
+
+
 
 
 function deleteKandidaat(e) {
@@ -1004,43 +1074,18 @@ function deleteKandidaat(e) {
 
 }
 
-// function addKandidaat() {
-//     var achternaam = $("#achternaam").val();
-//     var voornaam = $("#voornaam").val();
-//     var partij = $("#partij").val();
-//     var district = $("#district").val();
-//     var file_data = $('#customFileLang').prop('files')[0];
-//     var form_data = new FormData();
-//     form_data.append('file', file_data);
-//     $.ajax({
-//         type: 'POST',
-//         dataType: 'text', // what to expect back from the PHP script, if anything
-//         cache: false,
-//         contentType: false,
-//         processData: false,
-//         url: '../assets/php/kandidaten-crud.php',
-//         data: {
-//             form_data,
-//             insertkandidaat: 1
-//         },
-//         beforeSend: function() {},
-//         success: function(response) {
-//             if (response == "exist") {
-//                 existMessage()
-//             } else if (response == "errorEmpty") {
-//                 emptyMessage();
-//             } else if (response == "fatalError") {
-//                 fatalerrorMessage()
-//             } else if (response == "sqlError") {
-//                 sqlerrorMessage()
-//             } else if (response == "errorPartij") {
-//                 errorInput()
-//             } else if (response == "success") {
-
-
-//             }
-
-
-//         }
-//     })
-// }
+function editKandidaat(e) {
+    var id = e;
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/fetch-single.php',
+        data: {
+            id: id,
+            getKandidaat: 1
+        },
+        success: function(response) {
+            $('#modalEdit').html(response);
+            $('#modalEdit').modal('toggle');
+        }
+    })
+}

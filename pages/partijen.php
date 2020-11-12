@@ -237,7 +237,6 @@ session_start();
         <script>
             $(document).ready(function() {
                 fetchPartijen()
-
             });
         </script>
 </body>

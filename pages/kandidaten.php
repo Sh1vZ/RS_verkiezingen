@@ -149,7 +149,7 @@ session_start();
                             </div>
                         </div>
                         <div class="table-responsive">
-                          
+
                             <!-- Projects table -->
                             <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
                                 <thead class="thead-light">
@@ -168,9 +168,9 @@ session_start();
                     </div>
                 </div>
 
-                <button type="button " class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
+                <button type="button "  class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
 
-                
+
             </div>
             <!-- Footer -->
             <footer class="footer pt-0 ">
@@ -238,6 +238,9 @@ session_start();
                                 }
                                 ?>
                             </select>
+                            <script>
+                      
+                            </script>
                         </div>
                         <label class="form-control-label" for="customFileLang">Kandidaat Foto</label>
                         <div class="custom-file ">
@@ -253,30 +256,37 @@ session_start();
                     </form>
                 </div>
             </div>
-            <!--Scripts -->
-            <!-- Core -->
-            <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
-            <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
-            <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
-            <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
-            <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
-            <script src="../assets/vendor/select2/dist/js/select2.min.js"></script>
-            <!-- Optional JS -->
-            <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
-            <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
-            <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-            <script src="../assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
-            <!--JS -->
-            <script src="../assets/js/app.js "></script>
-            <script src="../assets/js/rs_verkiezingen.js "></script>
-            <script>
-                $(document).ready(function(e) {
-                    fetchKandidaten()
-                  
-                });
-            </script>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+    </div>
+    <!--Scripts -->
+    <!-- Core -->
+    <script src="../assets/vendor/jquery/dist/jquery.min.js "></script>
+    <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
+    <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
+    <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
+    <script src="../assets/vendor/select2/dist/js/select2.min.js"></script>
+    <!-- Optional JS -->
+    <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
+    <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+    <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
+    <!--JS -->
+    <script src="../assets/js/app.js "></script>
+    <script src="../assets/js/rs_verkiezingen.js "></script>
+    <script>
+        $(document).ready(function(e) {
+            fetchKandidaten()
+            
+
+        });
+    </script>
 </body>
 
 </html

@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     $i = $a++;
     $img=$row['img'];
     // Update Button
-    $updateButton = "<button class='btn btn-sm btn-success updateUser' onclick='editkandidaten(" . $row['ID_kandidaten'] . ")' data-id='" . $row['ID_kandidaten'] . "'' >Update</button>";
+    $updateButton = "<button class='btn btn-sm btn-success updateUser' onclick='editKandidaat(" . $row['ID_kandidaten'] . ")' data-id='" . $row['ID_kandidaten'] . "'' >Update</button>";
 
     // Delete Button
     $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deleteKandidaat(" . $row['ID_kandidaten'] . ")' data-id='" . $row['ID_kandidaten'] . "'>Delete</button>";
@@ -47,7 +47,7 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
         "image" => "<a href='../assets/uploads/$img' target='_blank'><img class='display-img' src='../assets/uploads/$img'  width='125' height='125'   ></a>",
         "acternaam" => $row['achternaam'],
         "voornaam" => $row['voornaam'],
-        "partij" => $row['Partijnaam']."(" . $row['Partijafkorting'] . ")",
+        "partij" => $row['Partijnaam']." "."(" . $row['Partijafkorting'] . ")",
         "district" => $row['districtnaam'],
         "action" => $action,
     );

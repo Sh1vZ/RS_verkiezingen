@@ -30,7 +30,7 @@ if (!empty($_POST['voornaam']) || !empty($_POST['achternaam']) || $_FILES['image
         }
         }
     } else {
-        echo 'errorEmpty';
+        echo 'errorImage';
     }
 }else {
     echo 'errorEmpty';
