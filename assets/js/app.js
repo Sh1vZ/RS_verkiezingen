@@ -444,6 +444,7 @@ function Logout() {
                     title: 'U bent succesvol uitgelogd',
                     html: 'U gaat terug naar de inlog pagina',
                     timer: 1500,
+                    allowOutsideClick: false,
                     timerProgressBar: true,
                     willOpen: () => {
                         Swal.showLoading()
@@ -884,7 +885,6 @@ function deletePartij(e) {
 // BEGIN KANDIDATEN
 
 function fetchKandidaten() {
-
     $('#datatable').DataTable({
         'processing': true,
         'serverSide': true,
@@ -1086,6 +1086,106 @@ function editKandidaat(e) {
         success: function(response) {
             $('#modalEdit').html(response);
             $('#modalEdit').modal('toggle');
+        }
+    })
+}
+
+function fetchStem(e) {
+    var district = e;
+    var partijStem = $("#partij-stem").val();
+
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/fetch-stem.php',
+        data: {
+            district: district,
+            partijStem: partijStem,
+            fetchStem: 1
+        },
+        success: function(response) {
+
+            $('#kandidatenTabel').html(response);
+        }
+    })
+}
+
+function Stemmen(e, l) {
+    var kandidaat = e;
+    var idb = l;
+    var anaam = $("#anaam").html();
+    var vnaam = $("#vnaam").html();
+    var partij = $("#pnaam").html();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Bent u zeker?',
+        text: `U gaat stemmen op ${vnaam+" "+ anaam} van partij ${partij}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ja, Stem!',
+        cancelButtonText: 'Annuleren!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: '../assets/php/burger-stemmen.php',
+                data: {
+                    kandidaat: kandidaat,
+                    idb: idb,
+                    stemmen: 1
+                },
+                success: function(response) {
+                    if (response == 'success') {
+                        let timerInterval
+                        Swal.fire({
+                            title: 'U heeft succesvol Getemd',
+                            html: 'U gaat nu naar de resultaten pagina',
+                            timer: 2500,
+                            allowOutsideClick: false,
+                            timerProgressBar: true,
+                            willOpen: () => {
+                                Swal.showLoading()
+                                timerInterval = setInterval(() => {
+                                    const content = Swal.getContent()
+                                    if (content) {
+                                        const b = content.querySelector('b')
+                                        if (b) {
+                                            b.textContent = Swal.getTimerLeft()
+                                        }
+                                    }
+                                }, 100)
+                            },
+                            onClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                window.location = './dashboard-gebruiker.php'
+                            }
+                        })
+                    } else if (response == 'sqlError') {
+                        sqlerrorMessage();
+                    }
+                }
+            })
+
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Niet Stemmen',
+                'U heeft niet gestemd',
+                'info'
+            )
         }
     })
 }

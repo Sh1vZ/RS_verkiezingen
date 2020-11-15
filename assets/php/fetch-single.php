@@ -146,10 +146,9 @@ if (isset($_POST['getKandidaat'])) {
                                 </div>
                                 <script src="../assets/js/app.js"></script>
                                 <script>
-                                    $('.district').select2({
-                                     });
-                                     $('#partij-edit').val(<?= $partij ?>).trigger('change')
-                                     $('#district-edit').val(<?= $district ?>).trigger('change')
+                                    $('.district').select2({});
+                                    $('#partij-edit').val(<?= $partij ?>).trigger('change')
+                                    $('#district-edit').val(<?= $district ?>).trigger('change')
                                 </script>
                                 <label class="form-control-label" for="customFileLang">Kandidaat Foto</label>
                                 <div class="custom-file">
@@ -157,7 +156,7 @@ if (isset($_POST['getKandidaat'])) {
                                     <input type="file" class="custom-file-input" id="customFileLang1" name='image-edit' lang="en" accept="image/*" onchange="PreviewImage1()">
                                     <label class="custom-file-label" for="customFileLang">Selecteer Kandidaat foto</label>
                                 </div>
-                                <label class="form-control-label" id='txt'for="uploadPreview1">Huidige Foto</label>
+                                <label class="form-control-label" id='txt' for="uploadPreview1">Huidige Foto</label>
                                 <a href='../assets/uploads/<?= $img ?>' target='_blank'><img id="uploadPreview1" src='../assets/uploads/<?= $img ?>' style="width: 50%; height: 50%;  display: block;   margin-left: auto;   margin-right: auto; margin-top:5%;" /></a>
                                 <div class="modal-footer">
                                     <button type="submit" name='submit' class="btn btn-primary">Toevoegen</button>
@@ -166,8 +165,9 @@ if (isset($_POST['getKandidaat'])) {
                             </form>
                         </div>
                     </div>
-            
-        <?php
+
+                <?php
+            }
         }
     }
-}
+    

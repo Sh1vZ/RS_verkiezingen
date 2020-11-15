@@ -1,4 +1,5 @@
 <?php
+include '../assets/php/conn.php';
 include '../assets/php/check.php';
 session_start();
 ?>
@@ -168,7 +169,7 @@ session_start();
                     </div>
                 </div>
 
-                <button type="button "  class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
+                <button type="button " class="fab" data-toggle="modal" data-target="#modal"><i class="ni ni-fat-add ni-2x"></i></button>
 
 
             </div>
@@ -217,7 +218,6 @@ session_start();
                             <select class="form-control district" data-placeholder="Selecteer Partij" id="partij" name="partij" data-allow-clear="true" data-toggle="select">
                                 <option></option>
                                 <?php
-                                include '../assets/php/conn.php';
                                 $sql    = "SELECT * FROM partij";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -230,7 +230,6 @@ session_start();
                             <select class="form-control district" data-placeholder="Selecteer District" id="district" name="district" data-allow-clear="true" data-toggle="select">
                                 <option></option>
                                 <?php
-                                include '../assets/php/conn.php';
                                 $sql    = "SELECT * FROM district";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -239,7 +238,7 @@ session_start();
                                 ?>
                             </select>
                             <script>
-                      
+
                             </script>
                         </div>
                         <label class="form-control-label" for="customFileLang">Kandidaat Foto</label>
@@ -283,8 +282,6 @@ session_start();
     <script>
         $(document).ready(function(e) {
             fetchKandidaten()
-            
-
         });
     </script>
 </body>

@@ -9,7 +9,6 @@ $columnIndex = $_POST['order'][0]['column']; // Column index
 $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
 $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
 $searchValue = mysqli_real_escape_string($conn, $_POST['search']['value']); // Search value
-
 ## Search 
 $searchQuery = " ";
 if ($searchValue != '') {

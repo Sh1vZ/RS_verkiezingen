@@ -1,7 +1,8 @@
-<?php 
-      include '../assets/php/check.php';
-      session_start();
- ?>
+<?php
+include '../assets/php/conn.php';
+include '../assets/php/check.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,9 +19,13 @@
     <!-- Icons -->
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/vendor/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
+    <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -89,12 +94,12 @@
                                     <div class="media align-items-center">
                                         <i class="ni ni-circle-08 ni-2x"></i>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['ID_nummer']; ?></span>
+                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['id']; ?></span>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#!" class="dropdown-item">
+                                    <a href="#" onclick='Logout()' class="dropdown-item">
                                         <i class="ni ni-user-run"></i>
                                         <span>Logout</span>
                                     </a>
@@ -125,38 +130,40 @@
                     <div class="card">
                         <div class="card-header border-0">
                             <div class="row align-items-center">
-                                <div class="col">
-                                    <h3 class="mb-0">Kandidaten</h3>
+                                <div class="col-6">
+                                    <h3 class="mb-0">Kandidaten District: <?= $_SESSION['naam']; ?></h3>
                                 </div>
-
+                                <div class="col-6">
+                                    <div class="">
+                                      <select class="form-control district" data-placeholder="Selecteer Partij" id="partij-stem" name="district" data-allow-clear="true" onchange="fetchStem(<?= $_SESSION['district']; ?>)" data-toggle="select">
+                                            <option></option>
+                                            <?php
+                                            $sql    = "SELECT * FROM partij";
+                                            $result = mysqli_query($conn, $sql);
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo "<option value='" . $row['ID_partij'] . "'>" . $row['Partijnaam'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
                             <!-- Projects table -->
-                            <table class="table align-items-center table-flush">
+                            <table id='datatable' class=' table ' role="grid" aria-describedby="datatable-basic_info">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Naam</th>
-                                        <th scope="col">Partij</th>
-                                        <th scope="col" style="width:30%">Action</th>
+                                        <th>#</th>
+                                        <th>Foto</th>
+                                        <th>Achternaam</th>
+                                        <th>Voornaam</th>
+                                        <th>Partij</th>
+                                        <th>Stemmen</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row ">
-                                            1
-                                        </th>
-                                        <td>
-                                            sfsdf
-                                        </td>
-                                        <td>
-                                            asdasd
-                                        </td>
-                                        <td>
-                                            VIEW
-                                        </td>
-                                    </tr>
+                                <tbody id='kandidatenTabel'>
+                                          <td>Selecteer een partij</td>
                                 </tbody>
                             </table>
                         </div>
@@ -183,11 +190,17 @@
     <script src="../assets/vendor/js-cookie/js.cookie.js "></script>
     <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js "></script>
     <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js "></script>
+    <script src="../assets/vendor/select2/dist/js/select2.min.js"></script>
     <!-- Optional JS -->
     <script src="../assets/vendor/chart.js/dist/Chart.min.js "></script>
     <script src="../assets/vendor/chart.js/dist/Chart.extension.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
     <!--JS -->
+    <script src="../assets/js/app.js "></script>
     <script src="../assets/js/rs_verkiezingen.js "></script>
+    <script>
+      
+    </script>
 </body>
 
 </html

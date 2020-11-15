@@ -1,7 +1,10 @@
-<?php 
-      include '../assets/php/check.php';
-      session_start();
- ?>
+<?php
+include '../assets/php/check.php';
+include '../assets/php/conn.php';
+session_start();
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -56,10 +59,16 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./stemmen.php">
-                                <i class="ni ni-box-2 text-red"></i>
-                                <span class="nav-link-text">Stemmen</span>
-                            </a>
+                            <?php
+                            if ($_SESSION['gestemd'] == 'Ja') {
+                                echo "";
+                            } else {
+                                echo "<a class='nav-link ' href='./stemmen.php'>
+                                <i class='ni ni-box-2 text-red'></i>
+                                <span class='nav-link-text'>Stemmen</span>
+                            </a>";
+                            }
+                            ?>
                         </li>
                     </ul>
                 </div>
@@ -90,7 +99,7 @@
                                     <div class="media align-items-center">
                                         <i class="ni ni-circle-08 ni-2x"></i>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold"><?=$_SESSION['id'];?></span>
+                                            <span class="mb-0 text-sm  font-weight-bold"><?= $_SESSION['id']; ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -117,7 +126,7 @@
                 </div>
             </div>
         </div>
-       
+
         <!-- Page content -->
         <div class="container-fluid mt--6">
             <div class="row">

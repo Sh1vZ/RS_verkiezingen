@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
     } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $id)) {
         echo "idError";
     } else {
-        $sql  = "SELECT * FROM burgers WHERE ID_nummer=?";
+        $sql  = "SELECT * FROM burgers LEFT JOIN district ON burgers.ID_district = district.ID_district WHERE ID_nummer=?";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             echo "sqlError";
@@ -30,6 +30,9 @@ if (isset($_POST['login'])) {
                 } elseif ($pwdc == true) {
                     session_start();
                     $_SESSION["id"] = $row["ID_nummer"];
+                    $_SESSION["district"] = $row["ID_district"];
+                    $_SESSION["naam"] = $row["districtnaam"];
+                    $_SESSION["gestemd"] = $row["gestemd"];
                     $_SESSION["login"] = true;
                     echo "success";
                 } else {
