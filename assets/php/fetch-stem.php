@@ -5,6 +5,7 @@ if (isset($_POST['fetchStem'])) {
     $district = $_POST['district'];
     $partijStem = $_POST['partijStem'];
     $idb=$_SESSION["id"];
+    $district1=$_SESSION["district"];
     if (empty($district) || empty($partijStem)) {
         echo '
         <tr>
@@ -30,7 +31,7 @@ if (isset($_POST['fetchStem'])) {
                     <td id='anaam'>  $naama </td>
                     <td id='vnaam'>  $naamv </td>
                     <td id='pnaam'>  $partij </td>
-                    <td><button class='btn btn-sm btn-success' onclick=Stemmen($kandidaat,'".$idb."')><i class='fa fa-pencil fa-2x' aria-hidden='true'></i>
+                    <td><button class='btn btn-sm btn-success' onclick=Stemmen($kandidaat,'".$idb."',$district1)><i class='fa fa-pencil fa-2x' aria-hidden='true'></i>
                     </button></td>
                 </tr>";
             }

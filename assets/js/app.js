@@ -1093,7 +1093,6 @@ function editKandidaat(e) {
 function fetchStem(e) {
     var district = e;
     var partijStem = $("#partij-stem").val();
-
     $.ajax({
         type: 'POST',
         url: '../assets/php/fetch-stem.php',
@@ -1109,9 +1108,11 @@ function fetchStem(e) {
     })
 }
 
-function Stemmen(e, l) {
+function Stemmen(e,l,p) {
     var kandidaat = e;
+    var districtID=p;
     var idb = l;
+    var partij1 = $("#partij-stem").val();
     var anaam = $("#anaam").html();
     var vnaam = $("#vnaam").html();
     var partij = $("#pnaam").html();
@@ -1139,6 +1140,8 @@ function Stemmen(e, l) {
                 url: '../assets/php/burger-stemmen.php',
                 data: {
                     kandidaat: kandidaat,
+                    partij1:partij1,
+                    districtID: districtID,
                     idb: idb,
                     stemmen: 1
                 },
