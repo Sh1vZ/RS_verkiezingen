@@ -7,14 +7,17 @@ if (isset($_POST['register'])) {
     $pwd = $_POST['pwd'];
     $idc = countDigits($id);
     $idlength = strlen($id);
+    $age = floor((time() - strtotime($date)) / 31556926);
     if (empty($id) || empty($date) || empty($district) || empty($pwd)) {
         echo "errorEmpty";
     } elseif ($idc < 6 || $idc > 6) {
         echo "idError";
     } elseif ($idlength < 8 || $idlength > 8) {
         echo "idError";
-    } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $id)) {
+    } elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $id)) {
         echo "idError";
+    } elseif ($age < 18) {
+        echo "ageError";
     } else {
         $sql = "SELECT ID_nummer FROM burgers WHERE ID_nummer= ?";
         $stmt = mysqli_stmt_init($conn);

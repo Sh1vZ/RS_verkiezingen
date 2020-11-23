@@ -13,36 +13,38 @@ $searchValue = mysqli_real_escape_string($conn, $_POST['search']['value']); // S
 ## Search 
 $searchQuery = " ";
 if ($searchValue != '') {
-    $searchQuery = " and (districtnaam like '%" . $searchValue . "%') ";
+    $searchQuery = " and (usernaam like '%" . $searchValue . "%') ";
 }
 
 ## Total number of records without filtering
-$sel = mysqli_query($conn, "select count(*) as allcount from district");
+$sel = mysqli_query($conn, "select count(*) as allcount from gebruikers");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 ## Total number of record with filtering
-$sel = mysqli_query($conn, "select count(*) as allcount from district WHERE 1 " . $searchQuery);
+$sel = mysqli_query($conn, "select count(*) as allcount from gebruikers WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$empQuery = "select * from district WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$empQuery = "select * from gebruikers WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $empRecords = mysqli_query($conn, $empQuery);
 $data = array();
 $a = 1;
 while ($row = mysqli_fetch_assoc($empRecords)) {
     $i = $a++;
     // Update Button
-    $updateButton = "<button class='btn btn-sm btn-success updateUser' onclick='editDistrict(" . $row['ID_district'] . ")' data-id='" . $row['ID_district'] . "'' >Update</button>";
+    $updateButton = "<button class='btn btn-sm btn-success updateUser' onclick='editAdmin(" . $row['ID'] . ")' data-id='" . $row['ID'] . "'' >Update</button>";
 
     // Delete Button
-    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deleteDistrict(" . $row['ID_district'] . ")' data-id='" . $row['ID_district'] . "'>Delete</button>";
+    $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deleteAdmin(" . $row['ID'] . ")' data-id='" . $row['ID'] . "'>Delete</button>";
 
     $action = $updateButton . " " . $deleteButton;
     $data[] = array(
-        "ID_district" => "$i",
-        "districtnaam" => $row['districtnaam'],
+        "ID" => "$i",
+        "usernaam" => $row['usernaam'],
+        "password" => $row['password'],
+        "rol" => $row['rol'],
         "action" => $action,
     );
 }

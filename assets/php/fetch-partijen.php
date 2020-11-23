@@ -35,7 +35,7 @@ $a = 1;
 while ($row = mysqli_fetch_assoc($empRecords)) {
     $i = $a++;
     // Update Button
-    $updateButton = "<button class='btn btn-sm btn-info updateUser' onclick='editPartij(" . $row['ID_partij'] . ")' data-id='" . $row['ID_partij'] . "'' >Update</button>";
+    $updateButton = "<button class='btn btn-sm btn-success updateUser' onclick='editPartij(" . $row['ID_partij'] . ")' data-id='" . $row['ID_partij'] . "'' >Update</button>";
 
     // Delete Button
     $deleteButton = "<button class='btn btn-sm btn-danger deleteUser'  onclick='deletePartij(" . $row['ID_partij'] . ")' data-id='" . $row['ID_partij'] . "'>Delete</button>";

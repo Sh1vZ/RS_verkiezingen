@@ -163,6 +163,19 @@ function Register() {
 
                     }
                 })
+            } else if (response == "ageError") {
+                Swal.fire({
+                    title: 'Leeftijd',
+                    text: 'U bent te jong om te stemmen',
+                    icon: 'error',
+                    confirmButtonColor: '#2e8b57',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(".submit").html(' <button type="button" onclick=" Register()" name="register"  class="btn btn-primary my-4">Registreer</button>')
+
+                    }
+                })
             } else if (response == "sqlError") {
                 Swal.fire({
                     title: 'Database Error',
@@ -408,6 +421,7 @@ function adminLogin() {
                     html: 'U gaat nu naar de resultaten pagina',
                     timer: 1500,
                     timerProgressBar: true,
+                    allowOutsideClick: false,
                     willOpen: () => {
                         Swal.showLoading()
                         timerInterval = setInterval(() => {
@@ -1189,6 +1203,200 @@ function Stemmen(e,l,p) {
                 'U heeft niet gestemd',
                 'info'
             )
+        }
+    })
+}
+$("#admin-form").on('submit', (function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: "../assets/php/admin-insert.php",
+        type: "POST",
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function() {},
+        success: function(response) {
+            if (response == 'success') {
+                Swal.fire({
+                    title: 'Successvol',
+                    text: "Admin succesvol ingevoerd",
+                    icon: 'success',
+                    showDenyButton: true,
+                    confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'Meer toevoegen?',
+                    denyButtonText: 'Sluiten?',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#admin-form').trigger("reset");
+                    } else if (result.isDenied) {
+                        $('#admin-form').trigger("reset");
+                        $('#modal').modal('toggle');
+                    }
+                })
+                $('#datatable').DataTable().ajax.reload();
+            } else if (response == "errorEmpty") {
+                emptyMessage();
+            } else if (response == "errorInput") {
+                errorInput();
+            } else if (response == 'exist') {
+                existMessage();
+            }
+        },
+    });
+}));
+
+function fetchAdmin() {
+
+    $('#datatable').DataTable({
+        'processing': true,
+        'serverSide': true,
+        "responsive": true,
+        'serverMethod': 'post',
+        "scrollCollapse": false,
+        'keys': !0,
+        'select': {
+            'style': "multi"
+        },
+        'language': {
+            'paginate': {
+                'previous': "<i class='fas fa-angle-left'>",
+                'next': "<i class='fas fa-angle-right'>"
+            },
+            'processing': 'loading'
+        },
+        'ajax': {
+            'url': '../assets/php/fetch-admin.php'
+        },
+        'columns': [
+            { data: 'ID' },
+            { data: 'usernaam' },
+            { data: 'password' },
+            { data: 'rol' },
+            { data: 'action' },
+        ],
+        "columnDefs": [
+            { "orderable": false, "targets": [2, 0] }
+        ]
+
+    });
+    $('#datatable').css("width", "100%");
+
+}
+
+function deleteAdmin(e) {
+    var id = e;
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Bent u zeker?',
+        text: "U kunt dit niet ongedaan maken!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ja, Verwijder het!',
+        cancelButtonText: 'Annuleren!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: '../assets/php/admin-crud.php',
+                data: {
+                    id: id,
+                    delete: 1
+                },
+                success: function(response) {
+                    if (response == 'success') {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Verwijderd.',
+                            'success'
+                        )
+                        $('#datatable').DataTable().ajax.reload();
+                    }
+                }
+            })
+
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'alles is OK',
+                'error'
+            )
+        }
+    })
+}
+
+function editAdmin(e) {
+    var id = e;
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/fetch-single.php',
+        data: {
+            id: id,
+            getAdmin: 1
+        },
+        success: function(response) {
+            $('#modalEdit').html(response);
+            $('#modalEdit').modal('toggle');
+        }
+    })
+}
+
+function updateAdmin(e) {
+    var id = e;
+    var usernaam = $("#usernaam-edit").val();
+    var rol = $("#rol-edit").val();
+    var pwd = $("#pwd-edit").val();
+    $.ajax({
+        type: 'POST',
+        url: '../assets/php/admin-crud.php',
+        data: {
+            id: id,
+            usernaam: usernaam,
+            rol: rol,
+            pwd: pwd,
+            updateAdmin: 1
+        },
+        success: function(response) {
+            if (response == "errorEmpty") {
+                emptyMessage()
+            } else if (response == "fatalError") {
+                fatalerrorMessage()
+            } else if (response == "sqlError") {
+                sqlerrorMessage()
+            } else if (response == "errorDistrict") {
+                errorInput()
+            } else if (response == "success") {
+                Swal.fire({
+                    title: 'Successvol',
+                    text: "District succesvol Bijgewerkt",
+                    icon: 'success',
+                    confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#modalEdit').modal('toggle');
+                    }
+                })
+                $('#districten-form-edit').trigger("reset");
+                $('#datatable').DataTable().ajax.reload();
+
+            } else if (response == 'exist') {
+                existMessage();
+            }
         }
     })
 }
