@@ -10,7 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>RS_verkiezingen | Districten</title>
+    <title>RS_verkiezingen | Admins</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
@@ -52,8 +52,8 @@ session_start();
             <div class="navbar-inner">
                 <!-- Collapse -->
                 <?php
-               include '../assets/php/navbar.php';
-               ?>
+                include '../assets/php/navbar.php';
+                ?>
             </div>
         </div>
     </nav>
@@ -128,7 +128,9 @@ session_start();
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">District</th>
+                                        <th scope="col">Usernaam</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">Rol</th>
                                         <th scope="col" style="width:15%">Acties</th>
                                     </tr>
                                 </thead>
@@ -164,16 +166,32 @@ session_start();
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <form action="" id="districten-form">
+                        <form action="#" id="admin-form">
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="District" id="district-input" type="text">
+                                <input class="form-control" name='usernaam' placeholder="Usernaam" id="usernaam" type="text">
                             </div>
                     </div>
+                    <div class="form-group">
+                        <div class="input-group input-group-merge">
+                            <select class="form-control" name="rol" id="rol" placeholder="Selecteer Rol">
+                                <option value="Admin">Admin</option>
+                                <option value="Super Admin">Super Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input class="form-control" name='pwd' placeholder="Password" id="pwd" type="text">
+                        </div>
+                    </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="addDistrict()" class="btn btn-primary">Toevoegen</button>
+                        <button type="submit" class="btn btn-primary">Toevoegen</button>
                         <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
                     </div>
                     </form>
@@ -183,7 +201,7 @@ session_start();
     </div>
 
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-      
+
     </div>
     <!--Scripts -->
     <!-- Core -->
@@ -202,7 +220,10 @@ session_start();
     <script src="../assets/js/app.js "></script>
     <script src="../assets/js/rs_verkiezingen.js "></script>
     <script>
-      
+        $(document).ready(function() {
+            fetchAdmin()
+
+        });
     </script>
 </body>
 

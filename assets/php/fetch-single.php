@@ -170,4 +170,62 @@ if (isset($_POST['getKandidaat'])) {
             }
         }
     }
-    
+
+        if (isset($_POST['getAdmin'])) {
+            $id = $_POST['id'];
+            $sql = "SELECT * FROM gebruikers WHERE ID=$id";
+            $res = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($res) > 0) {
+                while ($row = mysqli_fetch_assoc($res)) {
+                    $usernaam   = $row['usernaam'];
+                    $pwd   = $row['password'];
+                    $rol   = $row['rol'];
+                    ?>
+
+                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-default">Edit District</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <form action="#" id="admin-form">
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
+                                                </div>
+                                                <input class="form-control" name='usernaam' placeholder="Usernaam" id="usernaam-edit" value='<?= $usernaam; ?>' type="text">
+                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <select class="form-control" name="rol" id="rol-edit" placeholder="Selecteer Rol">
+                                                <option value="Admin"  <?php echo ($rol == 'Admin') ? "selected" : "" ?> >Admin</option>
+                                                <option value="Super Admin"<?php echo ($rol == 'Super Admin') ? "selected" : "" ?>>Super Admin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            </div>
+                                            <input class="form-control" name='pwd' placeholder="Password" id="pwd-edit" value='<?= $pwd; ?>' type="text">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick="updateAdmin(<?= $id; ?>)" class="btn btn-primary">Bewerk</button>
+                                        <button type="button" class="btn btn-danger  ml-auto" data-dismiss="modal">Sluiten</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+            <?php
+                }
+            }
+        }
