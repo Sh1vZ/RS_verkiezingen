@@ -163,6 +163,19 @@ function Register() {
 
                     }
                 })
+            } else if (response == "ageError") {
+                Swal.fire({
+                    title: 'Leeftijd',
+                    text: 'U bent te jong om te stemmen',
+                    icon: 'error',
+                    confirmButtonColor: '#2e8b57',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(".submit").html(' <button type="button" onclick=" Register()" name="register"  class="btn btn-primary my-4">Registreer</button>')
+
+                    }
+                })
             } else if (response == "sqlError") {
                 Swal.fire({
                     title: 'Database Error',
