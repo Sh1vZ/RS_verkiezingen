@@ -202,10 +202,7 @@ session_start();
     <script src="../assets/js/app.js "></script>
     <script src="../assets/js/rs_verkiezingen.js "></script>
     <script>
-        $(document).ready(function() {
-            fetchDistricten()
-
-        });
+      
     </script>
 </body>
 

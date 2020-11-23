@@ -408,6 +408,7 @@ function adminLogin() {
                     html: 'U gaat nu naar de resultaten pagina',
                     timer: 1500,
                     timerProgressBar: true,
+                    allowOutsideClick: false,
                     willOpen: () => {
                         Swal.showLoading()
                         timerInterval = setInterval(() => {

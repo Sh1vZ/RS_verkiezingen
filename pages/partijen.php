@@ -49,36 +49,9 @@ session_start();
             </div>
             <div class="navbar-inner">
                 <!-- Collapse -->
-                <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-                    <!-- Nav items -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link " href="./dashboard.php">
-                                <i class="ni ni-chart-pie-35 text-green"></i>
-                                <span class="nav-link-text">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./districten.php">
-                                <i class="ni ni-map-big text-red"></i>
-                                <span class="nav-link-text">Districten</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./kandidaten.php">
-                                <i class="ni ni-badge text-green"></i>
-                                <span class="nav-link-text">Kandidaten</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="./partijen.php">
-                                <i class="fas fa-hands-helping text-red"></i>
-                                <span class="nav-link-text">Partijen</span>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
+                <?php
+               include '../assets/php/navbar.php';
+               ?>
             </div>
         </div>
     </nav>
