@@ -3,7 +3,7 @@ function PreviewImage() {
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("customFileLang").files[0]);
 
-    oFReader.onload = function(oFREvent) {
+    oFReader.onload = function (oFREvent) {
         document.getElementById("uploadPreview").src = oFREvent.target.result;
     };
 };
@@ -12,7 +12,7 @@ function PreviewImage1() {
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("customFileLang1").files[0]);
 
-    oFReader.onload = function(oFREvent) {
+    oFReader.onload = function (oFREvent) {
         document.getElementById("uploadPreview1").src = oFREvent.target.result;
         $('#txt').html("");
     };
@@ -120,10 +120,10 @@ function Register() {
             pwd: pwd,
             register: 1
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $(".submit").html(' <button type="button" class="btn btn-primary my-4">Bezig <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>')
         },
-        success: function(response) {
+        success: function (response) {
             if (response == "exist") {
                 Swal.fire({
                     title: 'ID Bestaat al',
@@ -241,10 +241,10 @@ function Inloggen() {
             pwd: pwd,
             login: 1
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $(".submit").html(' <button type="button" class="btn btn-primary my-4">Bezig <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>')
         },
-        success: function(response) {
+        success: function (response) {
             if (response == "errorEmpty") {
                 Swal.fire({
                     title: 'Vul alles in!',
@@ -374,10 +374,10 @@ function adminLogin() {
             pwd: pwd,
             adminLogin: 1
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $(".submit").html(' <button type="button" class="btn btn-primary my-4">Bezig <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>')
         },
-        success: function(response) {
+        success: function (response) {
 
             if (response == "errorEmpty") {
                 Swal.fire({
@@ -451,7 +451,7 @@ function adminLogin() {
 function Logout() {
     $.ajax({
         url: '../assets/php/logout.php?action=logout',
-        success: function(data) {
+        success: function (data) {
             if (data = "success") {
                 let timerInterval
                 Swal.fire({
@@ -553,7 +553,7 @@ function deleteDistrict(e) {
                     id: id,
                     delete: 1
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response == 'success') {
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
@@ -589,8 +589,8 @@ function addDistrict() {
             district: district,
             insertdistrict: 1
         },
-        beforeSend: function() {},
-        success: function(response) {
+        beforeSend: function () { },
+        success: function (response) {
             if (response == "exist") {
                 existMessage();
             } else if (response == "errorEmpty") {
@@ -639,7 +639,7 @@ function editDistrict(e) {
             id: id,
             getDistrict: 1
         },
-        success: function(response) {
+        success: function (response) {
             $('#modalEdit').html(response);
             $('#modalEdit').modal('toggle');
         }
@@ -657,7 +657,7 @@ function updateDistrict(e) {
             district: district,
             updateDistrict: 1
         },
-        success: function(response) {
+        success: function (response) {
             if (response == "errorEmpty") {
                 emptyMessage()
             } else if (response == "fatalError") {
@@ -740,8 +740,8 @@ function addPartij() {
             afkorting: afkorting,
             insertpartij: 1
         },
-        beforeSend: function() {},
-        success: function(response) {
+        beforeSend: function () { },
+        success: function (response) {
             if (response == "exist") {
                 existMessage()
             } else if (response == "errorEmpty") {
@@ -790,7 +790,7 @@ function editPartij(e) {
             id: id,
             getPartij: 1
         },
-        success: function(response) {
+        success: function (response) {
             $('#modalEdit').html(response);
             $('#modalEdit').modal('toggle');
         }
@@ -810,7 +810,7 @@ function updatePartij(e) {
             afkorting: afkorting,
             updatePartij: 1
         },
-        success: function(response) {
+        success: function (response) {
             if (response == "errorEmpty") {
                 emptyMessage()
             } else if (response == "fatalError") {
@@ -870,7 +870,7 @@ function deletePartij(e) {
                     id: id,
                     delete: 1
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response == 'success') {
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
@@ -937,7 +937,7 @@ function fetchKandidaten() {
 
 }
 
-$("#form-kandidaat").on('submit', (function(e) {
+$("#form-kandidaat").on('submit', (function (e) {
     e.preventDefault();
     $.ajax({
         url: "../assets/php/kandidaten-insert.php",
@@ -946,8 +946,8 @@ $("#form-kandidaat").on('submit', (function(e) {
         contentType: false,
         cache: false,
         processData: false,
-        beforeSend: function() {},
-        success: function(response) {
+        beforeSend: function () { },
+        success: function (response) {
             if (response == 'success') {
                 Swal.fire({
                     title: 'Successvol',
@@ -991,7 +991,7 @@ $("#form-kandidaat").on('submit', (function(e) {
 
 
 
-$("#form-kandidaat-edit").on('submit', (function(e) {
+$("#form-kandidaat-edit").on('submit', (function (e) {
     e.preventDefault();
     $.ajax({
         url: "../assets/php/kandidaten-update.php",
@@ -1000,8 +1000,8 @@ $("#form-kandidaat-edit").on('submit', (function(e) {
         contentType: false,
         cache: false,
         processData: false,
-        beforeSend: function() {},
-        success: function(response) {
+        beforeSend: function () { },
+        success: function (response) {
             if (response == 'success') {
                 Swal.fire({
                     title: 'Successvol',
@@ -1062,7 +1062,7 @@ function deleteKandidaat(e) {
                     id: id,
                     delete: 1
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response == 'success') {
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
@@ -1097,7 +1097,7 @@ function editKandidaat(e) {
             id: id,
             getKandidaat: 1
         },
-        success: function(response) {
+        success: function (response) {
             $('#modalEdit').html(response);
             $('#modalEdit').modal('toggle');
         }
@@ -1115,16 +1115,16 @@ function fetchStem(e) {
             partijStem: partijStem,
             fetchStem: 1
         },
-        success: function(response) {
+        success: function (response) {
 
             $('#kandidatenTabel').html(response);
         }
     })
 }
 
-function Stemmen(e,l,p) {
+function Stemmen(e, l, p) {
     var kandidaat = e;
-    var districtID=p;
+    var districtID = p;
     var idb = l;
     var partij1 = $("#partij-stem").val();
     var anaam = $("#anaam").html();
@@ -1141,7 +1141,7 @@ function Stemmen(e,l,p) {
 
     swalWithBootstrapButtons.fire({
         title: 'Bent u zeker?',
-        text: `U gaat stemmen op ${vnaam+" "+ anaam} van partij ${partij}`,
+        text: `U gaat stemmen op ${vnaam + " " + anaam} van partij ${partij}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ja, Stem!',
@@ -1154,12 +1154,12 @@ function Stemmen(e,l,p) {
                 url: '../assets/php/burger-stemmen.php',
                 data: {
                     kandidaat: kandidaat,
-                    partij1:partij1,
+                    partij1: partij1,
                     districtID: districtID,
                     idb: idb,
                     stemmen: 1
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response == 'success') {
                         let timerInterval
                         Swal.fire({
@@ -1206,7 +1206,7 @@ function Stemmen(e,l,p) {
         }
     })
 }
-$("#admin-form").on('submit', (function(e) {
+$("#admin-form").on('submit', (function (e) {
     e.preventDefault();
     $.ajax({
         url: "../assets/php/admin-insert.php",
@@ -1215,8 +1215,8 @@ $("#admin-form").on('submit', (function(e) {
         contentType: false,
         cache: false,
         processData: false,
-        beforeSend: function() {},
-        success: function(response) {
+        beforeSend: function () { },
+        success: function (response) {
             if (response == 'success') {
                 Swal.fire({
                     title: 'Successvol',
@@ -1313,7 +1313,7 @@ function deleteAdmin(e) {
                     id: id,
                     delete: 1
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response == 'success') {
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
@@ -1347,7 +1347,7 @@ function editAdmin(e) {
             id: id,
             getAdmin: 1
         },
-        success: function(response) {
+        success: function (response) {
             $('#modalEdit').html(response);
             $('#modalEdit').modal('toggle');
         }
@@ -1369,7 +1369,7 @@ function updateAdmin(e) {
             pwd: pwd,
             updateAdmin: 1
         },
-        success: function(response) {
+        success: function (response) {
             if (response == "errorEmpty") {
                 emptyMessage()
             } else if (response == "fatalError") {
