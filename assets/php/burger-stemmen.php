@@ -13,6 +13,17 @@ $districtID = $_POST['districtID'];
         $res1 = mysqli_query($conn, $sql1);
         if ($res1) {
             $_SESSION["gestemd"] = 'Ja';
+        }
+        $sql2="SELECT * FROM res_per_district WHERE ID_district=$districtID AND ID_partij=$partij1";
+        $res2=mysqli_query($conn,$sql2);
+        $count=mysqli_num_rows($res2);
+        if($count>0){
+            $sql3  = "UPDATE res_per_district SET aantalstemmen=aantalstemmen+1 WHERE ID_district=$districtID AND ID_partij=$partij1";
+            $res3=mysqli_query($conn,$sql3);
+            echo 'success';
+        }else{
+            $sql4="INSERT INTO res_per_district (ID_district,ID_partij) VALUES ($districtID,$partij1) ";
+            $res4=mysqli_query($conn,$sql4);
             echo 'success';
         }
     } else {
