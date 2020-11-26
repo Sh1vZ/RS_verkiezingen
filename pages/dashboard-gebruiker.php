@@ -2,8 +2,6 @@
 include '../assets/php/check.php';
 include '../assets/php/conn.php';
 session_start();
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -178,7 +176,7 @@ session_start();
                         <div class="card-body">
                             <!-- Chart -->
                             <div class="chart">
-                                <canvas id="chart-bars" class="chart-canvas"></canvas>
+                                <canvas id="Graph" class="chart-canvas"></canvas>
                             </div>
                         </div>
                     </div>
@@ -211,7 +209,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
     <!--JS -->
     <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/charts/dash/app-dash.js"></script>
+    <script src="../assets/js/app-dash.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
 </body>
 
