@@ -15,7 +15,8 @@ $(document).ready(function() {
             var chartdata = {
                 labels: partij,
                 datasets: [{
-                    label: 'stemmen',
+                    label: 'Aantal Stemmen',
+                    backgroundColor: '#2dce89',
                     data: stemmen,
                 }]
             };
