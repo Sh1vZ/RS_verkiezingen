@@ -35,6 +35,7 @@ $(document).ready(function () {
                 data: chartdata
             });
         },
+
         error: function (data) {
             console.log(data);
         }
