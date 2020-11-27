@@ -18,6 +18,9 @@ session_start();
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
@@ -111,9 +114,9 @@ session_start();
                                             <span><i class="h2 font-weight-bold mb-0"></i></span>
                                             <h3 class="mb-0 white-text"> <?php include('../assets/php/card_aantalpartij.php'); ?></h3>
                                         </div>
-                                         <div class="col s5 m5 right-align">
-                                
-                            </div>
+                                        <div class="col s5 m5 right-align">
+
+                                        </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                                                 <i class="ni ni-active-40"></i>
@@ -152,7 +155,7 @@ session_start();
                                             <span><i class="h2 font-weight-bold mb-0"></i></span>
                                             <h3 class="mb-0 white-text"> <?php include('../assets/php/card_kandidaten.php'); ?></h3>
                                         </div>
-                                       
+
                                         <div class="col-4">
                                             <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
                                                 <i class="ni ni-money-coins"></i>
@@ -168,7 +171,7 @@ session_start();
                                 <!-- Card body -->
                                 <div class="card-body">
                                     <div class="row">
-                                         <div class="col">
+                                        <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Partij meeste stemmen</h5>
                                             <span><i class="h2 font-weight-bold mb-0"></i></span>
                                             <h3 class="mb-0 white-text"> <?php include('../assets/php/card_partij.php'); ?></h3>
@@ -228,7 +231,7 @@ session_start();
                 </div>
             </div>
             <div class="row">
-            <div class="col-xl-8">
+                <div class="col-xl-8">
                     <div class="card">
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
@@ -239,16 +242,16 @@ session_start();
                                 <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
                                         <li class="nav-item mr-2 mr-md-0">
-                                        <select class="form-control district"  id="district" onchange=getChart(this.value) data-placeholder="Selecteer District"  data-toggle="select">
+                                            <select class="form-control district" id="district" onchange=getChart(this.value) data-placeholder="Selecteer District" data-toggle="select">
                                                 <option></option>
                                                 <?php
-                                                    $sql    = "SELECT * FROM district";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                $sql    = "SELECT * FROM district";
+                                                $result = mysqli_query($conn, $sql);
+                                                while ($row = mysqli_fetch_assoc($result)) {
                                                     echo "<option value='" . $row['ID_district'] . "'>" . $row['districtnaam'] . "</option>";
-                                                    }
+                                                }
                                                 ?>
-                                              </select>
+                                            </select>
                                         </li>
                                     </ul>
                                 </div>
@@ -275,35 +278,35 @@ session_start();
 
                         <div class="table-responsive">
                             <!-- Projects table -->
-
-
-                            <table class="table align-items-center table-flush">
+                            <table class="table align-items-center table-flush" id="data">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">District</th>
                                     </tr>
                                 </thead>
-                                <!-- <tbody> -->
+                                <tbody>
 
-                                <?php
-                                $result = "SELECT ID_nummer,districtnaam FROM burgers INNER JOIN district ON burgers.ID_district = district.ID_district ORDER BY ID_nummer DESC LIMIT 10  ";
-                                $res = $conn->query($result);
-                                if ($res->num_rows > 0) {
-                                    while ($row = $res->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo  "<td>" . $row['ID_nummer'] . "</td>";
-                                        echo "<td>" . $row['districtnaam'] . "</td>";
-                                        echo "</tr>";
+                                    <?php
+                                    $result = "SELECT ID_nummer,districtnaam FROM burgers INNER JOIN district ON burgers.ID_district = district.ID_district ORDER BY ID_nummer DESC";
+                                    $res = $conn->query($result);
+                                    if ($res->num_rows > 0) {
+                                        while ($row = $res->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo  "<td>" . $row['ID_nummer'] . "</td>";
+                                            echo "<td>" . $row['districtnaam'] . "</td>";
+                                            echo "</tr>";
+                                        }
                                     }
-                                }
 
-                                echo "  </table>";
 
-                                //close the connection
-                                $conn->close();
 
-                                ?>
+                                    //close the connection
+                                    $conn->close();
+
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -333,11 +336,30 @@ session_start();
     <script src="../assets/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
+    <script src="../assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="../assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <!--JS -->
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/app-dash.js"></script>
     <script src="../assets/js/app-dash-kandidaat.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
+    <script>
+        $('#data').dataTable({
+            "searching": false,
+            'language': {
+            'paginate': {
+                'previous': "<i class='fas fa-angle-left'>",
+                'next': "<i class='fas fa-angle-right'>"
+            },
+        }
+        });
+    </script>
 </body>
 
 </html
