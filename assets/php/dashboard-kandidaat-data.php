@@ -6,22 +6,22 @@ include 'conn.php';
 header('Content-Type: application/json');
 
 //query to get data from the table
-$query = "SELECT Partijafkorting, aantalstemmen FROM partij";
+$query1 = "SELECT achternaam,voornaam,aantalstemmen FROM kandidaten";
 
 //execute query
-$result = $conn->query($query);
+$result1 = $conn->query($query1);
 
 //loop through the returned data
-$data = array();
-foreach ($result as $row) {
-  $data[] = $row;
+$data1 = array();
+foreach ($result1 as $row1) {
+    $data1[] = $row1;
 }
 
 //free memory associated with result
-$result->close();
+$result1->close();
 
 //close connection
 $conn->close();
 
 //now print the data
-print json_encode($data);
+print json_encode($data1);

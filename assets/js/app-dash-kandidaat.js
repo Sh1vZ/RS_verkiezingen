@@ -1,32 +1,32 @@
 $(document).ready(function () {
     $.ajax({
-        url: "../assets/php/dashboard-partij-data.php",
+        url: "../assets/php/dashboard-kandidaat-data.php",
         method: "GET",
         success: function (data) {
             console.log(data);
-            var partij = [];
-            var stemmen = [];
+            var Kandidaat = [];
+            var stemmen1 = [];
 
             for (var i in data) {
-                partij.push("Partij " + data[i].Partijafkorting);
-                stemmen.push(data[i].aantalstemmen);
+                Kandidaat.push("Kandidaat " + data[i].achternaam + data[i].voornaam);
+                stemmen1.push(data[i].aantalstemmen);
             }
 
-            var chartdata = {
-                labels: partij,
+            var chartdata1 = {
+                labels: Kandidaat,
                 datasets: [{
                     label: 'Aantal Stemmen',
                     backgroundColor: '#2dce89',
-                    data: stemmen,
+                    data: stemmen1,
                 }]
             };
 
-            var ctx = $("#Graph");
+            var ctx1 = $("#Graph1");
 
 
-            var barGraph = new Chart(ctx, {
+            var barGraph = new Chart(ctx1, {
                 type: 'bar',
-                data: chartdata
+                data: chartdata1
             });
         },
 

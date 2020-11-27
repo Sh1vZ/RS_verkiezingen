@@ -46,9 +46,9 @@ session_start();
             </div>
             <div class="navbar-inner">
                 <!-- Collapse -->
-               <?php
-               include '../assets/php/navbar.php';
-               ?>
+                <?php
+                include '../assets/php/navbar.php';
+                ?>
             </div>
         </div>
     </nav>
@@ -185,10 +185,10 @@ session_start();
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
-                                    <h5 class="h3 text-muted mb-0">Sales value</h5>
+                                    <h4 class="text-light text-uppercase ls-1 mb-1">Overzicht</h4>
+                                    <h6 class="h3 text-muted mb-0">Partijen</h6>
                                 </div>
-                                <div class="col">
+                                <!-- <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
                                         <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
                                             <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
@@ -203,14 +203,14 @@ session_start();
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
                             <!-- Chart -->
                             <div class="chart">
                                 <!-- Chart wrapper -->
-                                <canvas id="chart-sales-dark" class="chart-canvas"></canvas>
+                                <canvas id="Graph" class="chart-canvas"></canvas>
                             </div>
                         </div>
                     </div>
@@ -220,15 +220,15 @@ session_start();
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase text-muted ls-1 mb-1">???</h6>
-                                    <h5 class="h3 mb-0">???</h5>
+                                    <h4 class="text-uppercase text-muted ls-1 mb-1">Overzicht</h4>
+                                    <h6 class="h3 mb-0">Kandidaat</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <!-- Chart -->
                             <div class="chart">
-                                <canvas id="chart-bars" class="chart-canvas"></canvas>
+                                <canvas id="Graph1" class="chart-canvas"></canvas>
                             </div>
                         </div>
                     </div>
@@ -245,8 +245,11 @@ session_start();
 
                             </div>
                         </div>
+
                         <div class="table-responsive">
                             <!-- Projects table -->
+
+
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
@@ -254,8 +257,29 @@ session_start();
                                         <th scope="col">District</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <!-- <tbody> -->
+
+                                <?php
+                                $result = "SELECT ID_nummer, districtnaam FROM burgers,district";
+                                $res = $conn->query($result);
+                                if ($res->num_rows > 0) {
+                                    while ($row = $res->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo  "<td>" . $row['ID_nummer'] . "</td>";
+                                        echo "<td>" . $row['districtnaam'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                                }
+
+                                echo "  </table>";
+
+                                //close the connection
+                                $conn->close();
+
+                                ?>
+
+
+                                <!-- <tr>
                                         <th scope="row">
                                             /argon/charts.php
                                         </th>
@@ -280,9 +304,8 @@ session_start();
                                             3,513
                                         </td>
 
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    </tr> -->
+                                <!-- </tbody> -->
                         </div>
                     </div>
                 </div>
@@ -313,6 +336,8 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
     <!--JS -->
     <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/app-dash.js"></script>
+    <script src="../assets/js/app-dash-kandidaat.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
 </body>
 

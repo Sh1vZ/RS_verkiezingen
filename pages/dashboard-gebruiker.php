@@ -133,8 +133,8 @@ session_start();
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-light text-uppercase ls-1 mb-1">Overzicht</h6>
-                                    <h5 class="h3 text-muted mb-0">Partijen</h5>
+                                    <h4 class="text-light text-uppercase ls-1 mb-1">Overzicht</h4>
+                                    <h6 class="h3 mb-0">Partijen</h6>
                                 </div>
                                 <!-- <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
@@ -145,8 +145,8 @@ session_start();
                                             </a>
                                         </li>
                                         <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k"> -->
-                                            <!-- <a href="#" class="nav-link py-2 px-3" data-toggle="tab"> -->
-                                            <!-- <span class="d-none d-md-block">??</span>
+                                <!-- <a href="#" class="nav-link py-2 px-3" data-toggle="tab"> -->
+                                <!-- <span class="d-none d-md-block">??</span>
                                             <span class="d-md-none">W</span>
                                             </a>
                                         </li>
@@ -168,15 +168,17 @@ session_start();
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Overzicht</h6>
-                                    <h5 class="h3 mb-0">Partij</h5>
+                                    <h4 class="text-uppercase text-muted ls-1 mb-1">Overzicht</h4>
+                                    <h6 class="h3 mb-0">Kandidaat</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <!-- Chart -->
                             <div class="chart">
-                                <h1>INSERT CHART HERE</h1>
+                                <!-- <h1>INSERT CHART HERE</h1> -->
+                                <canvas id="Graph1" class="chart-canvas"></canvas>
+
                             </div>
                         </div>
                     </div>
@@ -210,6 +212,7 @@ session_start();
     <!--JS -->
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/app-dash.js"></script>
+    <script src="../assets/js/app-dash-kandidaat.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
 </body>
 
