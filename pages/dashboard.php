@@ -107,9 +107,13 @@ session_start();
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">????</h5>
-                                            <span class="h2 font-weight-bold mb-0">350,897</span>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Aantal Partijen</h5>
+                                            <span><i class="h2 font-weight-bold mb-0"></i></span>
+                                            <h3 class="mb-0 white-text"> <?php include('../assets/php/card_aantalpartij.php'); ?></h3>
                                         </div>
+                                         <div class="col s5 m5 right-align">
+                                
+                            </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                                                 <i class="ni ni-active-40"></i>
@@ -125,8 +129,9 @@ session_start();
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">????</h5>
-                                            <span class="h2 font-weight-bold mb-0">2,356</span>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Aantal stemmen</h5>
+                                            <span><i class="h2 font-weight-bold mb-0"></i></span>
+                                            <h3 class="mb-0 white-text"> <?php include('../assets/php/cards.php'); ?></h3>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -142,14 +147,17 @@ session_start();
                                 <!-- Card body -->
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">????</h5>
-                                            <span class="h2 font-weight-bold mb-0">924</span>
+                                        <div class="col-8">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Kandidaat meeste stemmen</h5>
+                                            <span><i class="h2 font-weight-bold mb-0"></i></span>
+                                            <h3 class="mb-0 white-text"> <?php include('../assets/php/card_kandidaten.php'); ?></h3>
                                         </div>
-                                        <div class="col-auto">
+                                       
+                                        <div class="col-4">
                                             <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
                                                 <i class="ni ni-money-coins"></i>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -160,9 +168,10 @@ session_start();
                                 <!-- Card body -->
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">?????</h5>
-                                            <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                         <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Partij meeste stemmen</h5>
+                                            <span><i class="h2 font-weight-bold mb-0"></i></span>
+                                            <h3 class="mb-0 white-text"> <?php include('../assets/php/card_partij.php'); ?></h3>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -260,7 +269,7 @@ session_start();
                                 <!-- <tbody> -->
 
                                 <?php
-                                $result = "SELECT ID_nummer, districtnaam FROM burgers,district";
+                                $result = "SELECT ID_nummer,districtnaam FROM burgers INNER JOIN district ON burgers.ID_district = district.ID_district ORDER BY ID_nummer DESC LIMIT 10  ";
                                 $res = $conn->query($result);
                                 if ($res->num_rows > 0) {
                                     while ($row = $res->fetch_assoc()) {
