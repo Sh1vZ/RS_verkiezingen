@@ -2,6 +2,8 @@
 include '../assets/php/check.php';
 include '../assets/php/conn.php';
 session_start();
+$a = $_SESSION["district"];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,8 +11,6 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
     <title>RS_verkiezingen | Home</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
@@ -20,6 +20,7 @@ session_start();
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../assets/vendor/select2/dist/css/select2.min.css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/rs_verkiezingen.css" type="text/css">
@@ -128,30 +129,14 @@ session_start();
         <!-- Page content -->
         <div class="container-fluid mt--6">
             <div class="row">
-                <div class="col-xl-8">
+                <div class="col-xl-6">
                     <div class="card">
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h4 class="text-light text-uppercase ls-1 mb-1">Overzicht</h4>
-                                    <h6 class="h3 mb-0">Partijen</h6>
+                                    <h6 class="h3 mb-0">Landelijk overzicht</h6>
                                 </div>
-                                <!-- <div class="col">
-                                    <ul class="nav nav-pills justify-content-end">
-                                        <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
-                                            <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                                                <span class="d-none d-md-block">Partij</span>
-                                                <span class="d-md-none">M</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k"> -->
-                                <!-- <a href="#" class="nav-link py-2 px-3" data-toggle="tab"> -->
-                                <!-- <span class="d-none d-md-block">??</span>
-                                            <span class="d-md-none">W</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
@@ -163,14 +148,16 @@ session_start();
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4">
+                <div class="col-xl-6">
                     <div class="card">
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h4 class="text-uppercase text-muted ls-1 mb-1">Overzicht</h4>
-                                    <h6 class="h3 mb-0">Kandidaat</h6>
+                                    <h6 class="h3 mb-0">Aantal stemmen per kandidaat</h6>
+
                                 </div>
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -179,6 +166,42 @@ session_start();
                                 <!-- <h1>INSERT CHART HERE</h1> -->
                                 <canvas id="Graph1" class="chart-canvas"></canvas>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="text-uppercase text-muted ls-1 mb-1">Overzicht</h4>
+                                    <h6 class="h3 mb-0">Aantal Stemmen district <span id="txt"></span> </h6>
+                                </div>
+                                <div class="col">
+                                    <ul class="nav nav-pills justify-content-end">
+                                        <li class="nav-item mr-2 mr-md-0">
+                                            <select class="form-control district" id="district" onchange=getChart(this.value) data-placeholder="Selecteer Partij" data-toggle="select">
+                                                <option></option>
+                                                <?php
+                                                $sql    = "SELECT * FROM district";
+                                                $result = mysqli_query($conn, $sql);
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    echo "<option value='" . $row['ID_district'] . "'>" . $row['districtnaam'] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Chart -->
+                            <div class="chart" id='charte'>
+                                <canvas id="oChart" class="chart-canvas ochart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -209,11 +232,17 @@ session_start();
     <script src="../assets/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.9.0/dist/sweetalert2.all.min.js"></script>
+    <script src="../assets/vendor/select2/dist/js/select2.min.js"></script>
     <!--JS -->
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/app-dash.js"></script>
     <script src="../assets/js/app-dash-kandidaat.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#district').val(<?= $a ?>).trigger('change')
+        });
+    </script>
 </body>
 
 </html

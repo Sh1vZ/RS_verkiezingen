@@ -8,8 +8,6 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
     <title>RS_verkiezingen | Districten</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
@@ -52,8 +50,8 @@ session_start();
             <div class="navbar-inner">
                 <!-- Collapse -->
                 <?php
-               include '../assets/php/navbar.php';
-               ?>
+                include '../assets/php/navbar.php';
+                ?>
             </div>
         </div>
     </nav>
@@ -183,7 +181,7 @@ session_start();
     </div>
 
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-      
+
     </div>
     <!--Scripts -->
     <!-- Core -->

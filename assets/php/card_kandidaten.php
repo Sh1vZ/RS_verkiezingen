@@ -13,9 +13,9 @@ if ($stmt) {
             mysqli_stmt_bind_result($stmt, $aantal , $achternaam , $voornaam );
             mysqli_stmt_fetch($stmt);
             mysqli_stmt_close($stmt);
-            echo "$aantal ";
-            echo "$achternaam ";
-            echo "$voornaam ";
+            echo "$achternaam $aantal ($voornaam) ";
+            // echo "$achternaam ";
+            // echo "$voornaam ";
         }
     }
 } else {

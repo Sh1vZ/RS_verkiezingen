@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     $action = $updateButton . " " . $deleteButton;
     $data[] = array(
         "ID_kandidaten" => $i,
-        "image" => "<a href='../assets/uploads/$img' target='_blank'><img class='display-img' src='../assets/uploads/$img'  width='125' height='125'   ></a>",
+        "image" => "<a href='../assets/uploads/$img' target='_blank'><img class='display-img' alt='Image not found'  src='../assets/uploads/$img'  width='125' height='125'   ></a>",
         "acternaam" => $row['achternaam'],
         "voornaam" => $row['voornaam'],
         "partij" => $row['Partijnaam']." "."(" . $row['Partijafkorting'] . ")",
