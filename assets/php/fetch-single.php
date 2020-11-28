@@ -13,7 +13,7 @@ if (isset($_POST['getDistrict'])) {
             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-default">Edit District</h6>
+                        <h6 class="modal-title" id="modal-title-default">Districten bewerken</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -52,7 +52,7 @@ if (isset($_POST['getPartij'])) {
             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-default">Edit District</h6>
+                        <h6 class="modal-title" id="modal-title-default">Partij bewerken</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -185,7 +185,7 @@ if (isset($_POST['getKandidaat'])) {
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-default">Edit District</h6>
+                                    <h6 class="modal-title" id="modal-title-default">Administratie bewerken </h6>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
