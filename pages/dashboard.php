@@ -119,7 +119,7 @@ session_start();
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                                <i class="ni ni-active-40"></i>
+                                                <i class="fas fa-stamp"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -138,7 +138,7 @@ session_start();
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                                                <i class="ni ni-chart-pie-35"></i>
+                                                <i class="fas fa-pen"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@ session_start();
 
                                         <div class="col-4">
                                             <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                                <i class="ni ni-money-coins"></i>
+                                                <i class="fas fa-user"></i>
                                             </div>
 
                                         </div>
@@ -278,7 +278,7 @@ session_start();
 
                         <div class="table-responsive">
                             <!-- Projects table -->
-                            <table class="table align-items-center table-flush" id="data">
+                            <table class="table align-items-center table-flush" id="data" >
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">ID</th>
@@ -288,7 +288,7 @@ session_start();
                                 <tbody>
 
                                     <?php
-                                    $result = "SELECT ID_nummer,districtnaam FROM burgers INNER JOIN district ON burgers.ID_district = district.ID_district ORDER BY ID_nummer DESC";
+                                    $result = "SELECT ID_nummer,districtnaam FROM burgers INNER JOIN district ON burgers.ID_district = district.ID_district WHERE gestemd = 'ja' ORDER BY ID_nummer DESC";
                                     $res = $conn->query($result);
                                     if ($res->num_rows > 0) {
                                         while ($row = $res->fetch_assoc()) {
@@ -350,7 +350,8 @@ session_start();
     <script src="../assets/js/app-dash-kandidaat.js"></script>
     <script src="../assets/js/rs_verkiezingen.js"></script>
     <script>
-        $('#data').dataTable({
+       $('#data').dataTable({
+            "ordering": false,
             "searching": false,
             'language': {
             'paginate': {

@@ -35,7 +35,7 @@ function existMessage() {
 function emptyMessage() {
     Swal.fire({
         title: 'Vul alles in!',
-        text: 'Niet alles in ingevuld',
+        text: 'Niet alles is ingevuld',
         icon: 'error',
         confirmButtonColor: '#2e8b57',
         allowOutsideClick: false
@@ -140,7 +140,7 @@ function Register() {
             } else if (response == "errorEmpty") {
                 Swal.fire({
                     title: 'Vul alles in!',
-                    text: 'Niet alles in ingevuld',
+                    text: 'Niet alles is ingevuld',
                     icon: 'error',
                     confirmButtonColor: '#2e8b57',
                     allowOutsideClick: false
@@ -248,7 +248,7 @@ function Inloggen() {
             if (response == "errorEmpty") {
                 Swal.fire({
                     title: 'Vul alles in!',
-                    text: 'Niet alles in ingevuld',
+                    text: 'Niet alles is ingevuld',
                     icon: 'error',
                     confirmButtonColor: '#2e8b57',
                     allowOutsideClick: false
@@ -382,7 +382,7 @@ function adminLogin() {
             if (response == "errorEmpty") {
                 Swal.fire({
                     title: 'Vul alles in!',
-                    text: 'Niet alles in ingevuld',
+                    text: 'Niet alles is ingevuld',
                     icon: 'error',
                     confirmButtonColor: '#2e8b57',
                     allowOutsideClick: false
@@ -571,7 +571,7 @@ function deleteDistrict(e) {
         ) {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'alles is OK',
+                'U heeft geen district verwijdert',
                 'error'
             )
         }
@@ -668,8 +668,8 @@ function updateDistrict(e) {
                 errorInput()
             } else if (response == "success") {
                 Swal.fire({
-                    title: 'Successvol',
-                    text: "District succesvol Bijgewerkt",
+                    title: 'Succesvol',
+                    text: "District succesvol bijgewerkt",
                     icon: 'success',
                     confirmButtonColor: '#2e8b57',
                     confirmButtonText: 'OK',
@@ -888,7 +888,7 @@ function deletePartij(e) {
         ) {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'alles is OK',
+                'U heeft geen partij verwijdert',
                 'error'
             )
         }
@@ -1080,7 +1080,7 @@ function deleteKandidaat(e) {
         ) {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'alles is OK',
+                'U heeft geen kandidaat verwijdert',
                 'error'
             )
         }
@@ -1163,7 +1163,7 @@ function Stemmen(e, l, p) {
                     if (response == 'success') {
                         let timerInterval
                         Swal.fire({
-                            title: 'U heeft succesvol Getemd',
+                            title: 'U heeft succesvol Gestemd',
                             html: 'U gaat nu naar de resultaten pagina',
                             timer: 2500,
                             allowOutsideClick: false,
@@ -1331,7 +1331,7 @@ function deleteAdmin(e) {
         ) {
             swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'alles is OK',
+                'U heeft geen admin verwijdert',
                 'error'
             )
         }
@@ -1381,7 +1381,7 @@ function updateAdmin(e) {
             } else if (response == "success") {
                 Swal.fire({
                     title: 'Successvol',
-                    text: "District succesvol Bijgewerkt",
+                    text: "Admin succesvol Bijgewerkt",
                     icon: 'success',
                     confirmButtonColor: '#2e8b57',
                     confirmButtonText: 'OK',

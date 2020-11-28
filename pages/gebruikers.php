@@ -116,7 +116,7 @@ session_start();
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Districten</h3>
+                                    <h3 class="mb-0">Administratie</h3>
                                 </div>
 
                             </div>
@@ -157,7 +157,7 @@ session_start();
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Type your modal title</h6>
+                    <h6 class="modal-title" id="modal-title-default">Admin Registratie</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
